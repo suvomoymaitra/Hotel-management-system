@@ -334,7 +334,6 @@ public:
 
 
 int main(){
-    cout<<"hello there";
 
     return 0;
 }
