@@ -80,10 +80,11 @@ public:
 class Dish {
 protected:
     string dish_name;
-    float price;
     string dish_type;
 
 public:
+    float price;
+
     Dish() {}
 
     Dish(string dish_name, float price, string dish_type) {
@@ -112,10 +113,9 @@ public:
 };
 
 class Resturant{
-protected:
+public:
     map <string,vector<Dish>> dishes;
 
-public:
     void display_menu() {
         for(auto itr : dishes){
             cout<<itr.first<<"\n";
@@ -172,6 +172,85 @@ public:
     }
 };
 
+/// Customer classes
+///---------------------------------------------------------------------------------------------------------------------
+
+
+class Customer : public Person {
+protected:
+    string cust_id;
+    string check_in_time;
+    int status;
+
+public:
+    Customer() {}
+
+    void set_data() {}
+
+    int select_choice() {}
+
+    void print_person() {}
+
+    virtual void view_total_bill() {}
+
+    virtual void allocate_rooms() {}
+
+    virtual void check_out() {}
+};
+
+class RoomCustomer:public Customer {
+protected:
+    float room_bill;
+    int book_status;
+    Room room;
+
+public:
+    vector<pair<string, float>> services_used;
+
+    void view_total_bill() {}
+
+    void allocate_room() {}
+
+    void print_person() {}
+
+    void check_out() {}
+
+    void room_service() {}
+};
+
+class ResturantCustomer : public Customer {
+    int table_no;
+    float dish_bill;
+    int book_status;
+
+public:
+    vector<pair<string, float>> food_ordered;
+
+    void view_total_bill() {
+        float total=0;
+        cout<<"Printing the bill o the customer : ";
+        for(int i=0;i<food_ordered.size();i++){
+            cout<<i+1<<":"<<food_ordered[i].first<<"---->"<<food_ordered[i].second<<"\n";
+            total+=food_ordered[i].second;
+        }
+        cout<<"Total bill of the customer is :"<<total;
+        cout<<"\n\n\nThank you!!!!\n\n";
+        cout<<"Please visit again!!!!\n";
+    }
+
+    void allocate_table() {}
+
+    void print_person() {}
+
+    void check_out() {}
+
+    void order_food() {}
+};
+
+
+///Employee classes
+///---------------------------------------------------------------------------------------------------------------------
+
 class Employee : public Person{
 protected:
     int emp_no;
@@ -206,7 +285,7 @@ public:
 
     RoomServiceEmployee(Name name,string addr,long int ph,string mail,int emp_no,Date d,string role):Employee(name,addr,ph,mail,d,emp_no,role) {}
 
-    void perform_duty() {}
+    virtual void perform_duty(RoomCustomer &R) {}
 };
 
 class Chef : public Employee{
@@ -220,76 +299,45 @@ public:
 
 class Waiter : public Employee{
 public:
-    void perform_duty() {};
+    void perform_duty(ResturantCustomer &R) {
+        cout<<"1 : order food\n";
+        cout<<"2 : Check out\n";
+        Resturant temp;
+        string s,type;
+        int qty;
+        int ch=0;
+        cin>>ch;
+        switch(ch){
+            case 1:
+                cout<<"\nEnter the names of the foods you want to order : ";
+                while(s!="exit"){
+                    cout<<"Enter the type : ";
+                    cin>>type;
+                    cout<<"Enter the food name : ";
+                    cin>>s;
+                    cout<<"Enter quantity : ";
+                    cin>>qty;
+                    R.food_ordered.push_back(make_pair(s,qty*find(temp.dishes[type].begin(),temp.dishes[type].end(),s)->price));
+                }
+                break;
+            case 2:
+                R.check_out();
+        }
+    }
 };
 
 class LaundryEmployee : public RoomServiceEmployee{
 public:
-    void perform_duty() {}
+    void perform_duty(RoomCustomer &R) {
+
+    }
 };
 
 class CleaningEmployee : public RoomServiceEmployee{
 public:
-    void perform_duty() {}
-};
+    void perform_duty(RoomCustomer &R) {
 
-class Customer : public Person {
-protected:
-    string cust_id;
-    string check_in_time;
-    int status;
-
-public:
-    Customer() {}
-
-    void set_data() {}
-
-    int select_choice() {}
-
-    void print_person() {}
-
-    virtual void view_total_bill() {}
-
-    virtual void allocate_rooms() {}
-
-    virtual void check_out() {}
-};
-
-class RoomCustomer:public Customer {
-protected:
-    float room_bill;
-    int book_status;
-    Room room;
-    vector<pair<string, float>> services_used;
-
-public:
-    void view_total_bill() {}
-
-    void allocate_room() {}
-
-    void print_person() {}
-
-    void check_out() {}
-
-    void room_service() {}
-};
-
-class ResturantCustomer : public Customer {
-    int table_no;
-    float dish_bill;
-    int book_status;
-    vector<pair<string, float>> food_ordered;
-
-public:
-    void view_total_bill() {}
-
-    void allocate_table() {}
-
-    void print_person() {}
-
-    void check_out() {}
-
-    void order_food() {}
+    }
 };
 
 class Hotel{
@@ -331,7 +379,6 @@ public:
 
     void remove_employee() {}
 };
-
 
 int main(){
 
