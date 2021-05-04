@@ -209,15 +209,6 @@ public:
     void perform_duty() {}
 };
 
-//class Chef : public Employee{
-//public:
-//    Chef() {}
-//
-//    Chef(Name name,string addr,long int ph,string mail,int emp_no,Date d,string role):Employee(name,addr,ph,mail,d,emp_no,role) {}
-//
-//    void perform_duty() {}
-//};
-
 class Waiter : public Employee{
 public:
     void perform_duty() {};
