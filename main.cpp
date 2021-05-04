@@ -163,11 +163,24 @@ public:
         this->person_dob = person_dob;
     }
 
-    virtual void put_person() {}
+    virtual void put_person() {
+        cout<<"\nName : ";
+        person_name.put_name();
+        cout<<"\nDOB : ";
+        person_dob.put_date();
+        cout<<"\nPhone number : ";
+        cin>>person_phone;
+        cout<<"\nPerson email id : ";
+        cin>>person_mail;
+        cout<<"\nPerson address : ";
+        cin>>person_addr;
+    }
 
     virtual void print_person() {
-        cout<<"\nName : ";person_name.get_name();
-        cout<<"\nDOB : ";person_dob.get_date();
+        cout<<"\nName : ";
+        person_name.get_name();
+        cout<<"\nDOB : ";
+        person_dob.get_date();
         cout<<"\nPhone number : "<<person_phone;
         cout<<"\nPerson email id : "<<person_mail;
         cout<<"\nPerson address : "<<person_addr;
@@ -187,7 +200,12 @@ protected:
 public:
     Customer() {}
 
-    void set_data() {}
+    void set_data() {
+        put_person();
+        cout<<"Enter check in time : ";
+        cin>>check_in_time;
+        status = 1;
+    }
 
     int select_choice() {}
 
@@ -235,16 +253,28 @@ public:
             cout<<i+1<<":"<<food_ordered[i].first<<"---->"<<food_ordered[i].second<<"\n";
             total+=food_ordered[i].second;
         }
+        dish_bill = total;
         cout<<"Total bill of the customer is :"<<total;
         cout<<"\n\n\nThank you!!!!\n\n";
         cout<<"Please visit again!!!!\n";
     }
 
-    void allocate_table() {}
+    void allocate_table(vector<int> vacant, vector<int> occupied) {
+        set_data();
+        cout<<"Your table number is : "<<vacant[vacant.size()-1];;
+        occupied.push_back(vacant[vacant.size()-1]);
+        table_no = occupied[occupied.size()-1];
+        vacant.pop_back();
+        book_status = 1;
+    }
 
     void print_person() {}
 
-    void check_out() {}
+    void check_out() {
+        view_total_bill();
+        status=0;
+        book_status = 0;
+    }
 
     void order_food() {}
 };
@@ -354,6 +384,7 @@ protected:
     vector <RoomCustomer> all_room_customers;
     vector <ResturantCustomer> all_resturant_customer;
     vector<int> vacant_tables;
+    vector<int> occupied_tables;
 
 public:
     Hotel() {}
