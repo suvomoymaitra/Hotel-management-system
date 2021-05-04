@@ -117,6 +117,8 @@ public:
     map <string,vector<Dish>> dishes;
 
     void display_menu() {
+        cout<<"\n-----------------------------------------Menu---------------------------------------------------------";
+        cout<<"\n------------------------------------------------------------------------------------------------------";
         for(auto itr : dishes){
             cout<<itr.first<<"\n";
             for(auto it : itr.second) it.get_dish();
@@ -228,7 +230,7 @@ public:
 
     void view_total_bill() {
         float total=0;
-        cout<<"Printing the bill o the customer : ";
+        cout<<"Printing the bill of the customer : ";
         for(int i=0;i<food_ordered.size();i++){
             cout<<i+1<<":"<<food_ordered[i].first<<"---->"<<food_ordered[i].second<<"\n";
             total+=food_ordered[i].second;
@@ -309,6 +311,7 @@ public:
         cin>>ch;
         switch(ch){
             case 1:
+                temp.display_menu();
                 cout<<"\nEnter the names of the foods you want to order : ";
                 while(s!="exit"){
                     cout<<"Enter the type : ";
