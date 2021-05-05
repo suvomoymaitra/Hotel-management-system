@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+long long int x=1;
 
 class Name {
     string name;
@@ -205,6 +206,7 @@ public:
         cout<<"Enter check in time : ";
         cin>>check_in_time;
         status = 1;
+        cust_id = x++;
     }
 
     int select_choice() {}
@@ -227,13 +229,28 @@ protected:
 public:
     vector<pair<string, float>> services_used;
 
-    void view_total_bill() {}
+    void view_total_bill() {
+        float total=0;
+        cout<<"Printing the bill of the customer : ";
+        for(int i=0;i<services_used.size();i++){
+            cout<<i+1<<":"<<services_used[i].first<<"---->"<<services_used[i].second<<"\n";
+            total+=services_used[i].second;
+        }
+        room_bill = total;
+        cout<<"Total bill of the customer is :"<<total;
+        cout<<"\n\n\nThank you!!!!\n\n";
+        cout<<"Please visit again!!!!\n";
+    }
 
     void allocate_room() {}
 
     void print_person() {}
 
-    void check_out() {}
+    void check_out() {
+        view_total_bill();
+        status=0;
+        book_status = 0;
+    }
 
     void room_service() {}
 };
@@ -317,7 +334,23 @@ public:
 
     RoomServiceEmployee(Name name,string addr,long int ph,string mail,int emp_no,Date d,string role):Employee(name,addr,ph,mail,d,emp_no,role) {}
 
-    virtual void perform_duty(RoomCustomer &R) {}
+    virtual void perform_duty(RoomCustomer &R) {
+        cout<<"1 : order food\n";
+        Resturant temp;
+        string s,type;
+        int qty;
+        temp.display_menu();
+        cout<<"\nEnter the names of the foods you want to order : ";
+        while(s!="exit"){
+            cout<<"Enter the type : ";
+            cin>>type;
+            cout<<"Enter the food name : ";
+            cin>>s;
+            cout<<"Enter quantity : ";
+            cin>>qty;
+            R.services_used.push_back(make_pair("Room service Food : "+s,qty*find(temp.dishes[type].begin(),temp.dishes[type].end(),s)->price));
+        }
+    }
 };
 
 class Chef : public Employee{
@@ -326,7 +359,7 @@ public:
 
     Chef(Name name,string addr,long int ph,string mail,int emp_no,Date d,string role):Employee(name,addr,ph,mail,d,emp_no,role) {}
 
-    void perform_duty() {}
+    void perform_duty(RoomCustomer &R) {}
 };
 
 class Waiter : public Employee{
@@ -382,7 +415,9 @@ protected:
     map <string,vector<int>> vacant_room;
     map <string,vector<int>> occupied_rooms;
     vector <RoomCustomer> all_room_customers;
+    vector <RoomCustomer> all_room_customers_inactive;
     vector <ResturantCustomer> all_resturant_customer;
+    vector <ResturantCustomer> all_resturant_customer_inactive;
     vector<int> vacant_tables;
     vector<int> occupied_tables;
 
@@ -412,6 +447,8 @@ public:
     void add_employee() {}
 
     void remove_employee() {}
+
+    void employee_login(){}
 };
 
 int main(){
