@@ -51,7 +51,9 @@ public:
         this->status = status;
     }
 
-    void set_room() {}
+    void set_room() {
+        status=1;
+    }
 
     bool is_vacant() {
         return !status;
@@ -67,7 +69,7 @@ public:
         else cout<<"Occupied";
     }
 
-    void vacate_room(int) {
+    void vacate_room() {
         status = 0;
     }
 
@@ -208,13 +210,9 @@ public:
         x++;
     }
 
-    int select_choice() {}
-
     void print_person() {}
 
     virtual void view_total_bill() {}
-
-    virtual void allocate_rooms() {}
 
     virtual void check_out() {}
 };
@@ -434,14 +432,17 @@ public:
 class LaundryEmployee : public RoomServiceEmployee{
 public:
     void perform_duty(RoomCustomer &R) {
-
+        cout<<"Enter the number of clothes : ";
+        int qty;
+        cin>>qty;
+        R.services_used.push_back(make_pair("Laundry service : ",qty*900));
     }
 };
 
 class CleaningEmployee : public RoomServiceEmployee{
 public:
     void perform_duty(RoomCustomer &R) {
-
+        R.services_used.push_back(make_pair("Room cleaning service : ",2300));
     }
 };
 
