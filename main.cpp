@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 long long int x=1;
+long long int y=1;
 
 class Name {
     string name;
@@ -8,6 +9,10 @@ class Name {
 public:
     void get_name() {
         cout << name;
+    }
+
+    string name_val(){
+        return name;
     }
 
     void put_name() {
@@ -177,6 +182,18 @@ public:
         cin>>person_addr;
     }
 
+    string get_mail(){
+        return person_mail;
+    }
+
+    long long int get_phone(){
+        return person_phone;
+    }
+
+    Name get_name(){
+        return person_name;
+    }
+
     virtual void print_person() {
         cout<<"\nName : ";
         person_name.get_name();
@@ -208,6 +225,10 @@ public:
         status = 1;
         cust_id = to_string(x);
         x++;
+    }
+
+    string get_cust_id(){
+        return cust_id;
     }
 
     void print_person() {}
@@ -338,13 +359,13 @@ public:
 
 class Employee : public Person{
 protected:
-    int emp_no;
+    long long int emp_no;
     string role;
 
 public:
     Employee() {}
 
-    Employee(Name name,string addr,long int ph,string mail,Date d,int emp_no,string role):Person(name,addr,ph,mail,d) {
+    Employee(Name name, string addr,long long int ph, string mail,Date d, long long int emp_no, string role): Person(name, addr, ph, mail, d) {
         this->emp_no = emp_no;
         this->role = role;
     }
@@ -368,16 +389,16 @@ class RoomServiceEmployee : public Employee{
 public:
     RoomServiceEmployee() {}
 
-    RoomServiceEmployee(Name name,string addr,long int ph,string mail,int emp_no,Date d,string role):Employee(name,addr,ph,mail,d,emp_no,role) {}
+    RoomServiceEmployee(Name name,string addr,long int ph,string mail,long long int emp_no,Date d,string role):Employee(name,addr,ph,mail,d,emp_no,role) {}
 
     virtual void perform_duty(RoomCustomer &R) {}
 };
 
-class Chef : public Employee{
+class Chef : public RoomServiceEmployee{
 public:
     Chef() {}
 
-    Chef(Name name,string addr,long int ph,string mail,int emp_no,Date d,string role):Employee(name,addr,ph,mail,d,emp_no,role) {}
+    Chef(Name name,string addr,long int ph,string mail,long long int emp_no,Date d,string role):RoomServiceEmployee(name,addr,ph,mail,emp_no,d,role) {}
 
     void perform_duty(RoomCustomer &R) {
         cout<<"1 : order food\n";
@@ -401,6 +422,10 @@ public:
 
 class Waiter : public Employee{
 public:
+    Waiter() {}
+
+    Waiter(Name name,string addr,long int ph,string mail,long long int emp_no,Date d,string role):Employee(name,addr,ph,mail,d,emp_no,role) {}
+
     void perform_duty(ResturantCustomer &R) {
         cout<<"1 : order food\n";
         cout<<"2 : Check out\n";
@@ -431,6 +456,10 @@ public:
 
 class LaundryEmployee : public RoomServiceEmployee{
 public:
+    LaundryEmployee() {}
+
+    LaundryEmployee(Name name,string addr,long int ph,string mail,long long int emp_no,Date d,string role):RoomServiceEmployee(name,addr,ph,mail,emp_no,d,role) {}
+
     void perform_duty(RoomCustomer &R) {
         cout<<"Enter the number of clothes : ";
         int qty;
@@ -441,6 +470,10 @@ public:
 
 class CleaningEmployee : public RoomServiceEmployee{
 public:
+    CleaningEmployee() {}
+
+    CleaningEmployee(Name name,string addr,long int ph,string mail,long long int emp_no,Date d,string role):RoomServiceEmployee(name,addr,ph,mail,emp_no,d,role) {}
+
     void perform_duty(RoomCustomer &R) {
         R.services_used.push_back(make_pair("Room cleaning service : ",2300));
     }
@@ -450,7 +483,10 @@ class Hotel{
 protected:
     string hotel_name;
     string hotel_address;
-    vector <Employee> emp;
+    vector <Chef> chefs;
+    vector <Waiter> waiters;
+    vector <LaundryEmployee> laundry_employees;
+    vector <CleaningEmployee> cleaning_employees;
     vector <Room> rooms;
     map <string,vector<int>> vacant_room;
     map <string,vector<int>> occupied_rooms;
@@ -460,6 +496,7 @@ protected:
     vector <ResturantCustomer> all_resturant_customer_inactive;
     vector<int> vacant_tables;
     vector<int> occupied_tables;
+    vector <string> feedbacks;
 
 public:
     Hotel() {}
@@ -472,23 +509,145 @@ public:
 
     void get_room() {}
 
+    void get_table() {}
+
     void display_available() {}
 
     void display_menu() {}
 
     void vacate_room() {}
 
-    void ask_feed_back() {}
+    void ask_feed_back() {
+        string s;
+        cout<<"\nEnter your feedback : ";
+        cin>>s;
+        feedbacks.push_back(s);
+    }
 
-    void get_customer_data() {}
+    void get_customer_data() {
+        cout<<"\nSearch customer by : ";
+        cout<<"\n1. customer id";
+        cout<<"\n2. customer phone number";
+        cout<<"\n3. customer email id";
+        cout<<"\n4. customer name";
+        int choice;
+        cin>>choice;
+        if(choice == 1){
+            string id;
+            cout<<"\nEnter the customer id : ";
+            cin>>id;
+            int flag=0;
+            for(auto itr:all_room_customers){
+                if(itr.get_cust_id()==id){
+                    cout<<"\nCustomer found";
+                    itr.print_person();
+                    flag=1;
+                    break;
+                }
+            }
+            if(!flag){
+                for(auto itr:all_resturant_customer){
+                    if(itr.get_cust_id()==id){
+                        cout<<"\nCustomer found";
+                        itr.print_person();
+                        flag=1;
+                        break;
+                    }
+                }
+            }
+            if(flag==0) cout<<"\nNo customer with given id found";
+        }
+        else if(choice ==2){
+            long long int ph;
+            cout<<"\nEnter the phone number to be searched : ";
+            cin>>ph;
+            int flag=0;
+            for(auto itr:all_room_customers){
+                if(itr.get_phone()==ph){
+                    if(!flag)
+                        cout<<"\nCustomer found";
+                    itr.print_person();
+                    flag=1;
+                    cout<<"\n------------------------------------------------------\n";
+                }
+            }
+            for(auto itr:all_resturant_customer){
+                if(itr.get_phone()==ph){
+                    if(!flag)
+                        cout<<"\nCustomer found";
+                    itr.print_person();
+                    flag=1;
+                    cout<<"\n------------------------------------------------------\n";
+                }
+            }
+            if(flag==0) cout<<"\nNo customer with given phone number found";
+        }
+        else if(choice == 3){
+            string m;
+            cout<<"\nEnter the email id to be searched : ";
+            cin>>m;
+            int flag=0;
+            for(auto itr:all_room_customers){
+                if(itr.get_mail()==m){
+                    if(!flag)
+                        cout<<"\nCustomer found";
+                    itr.print_person();
+                    flag=1;
+                    cout<<"\n------------------------------------------------------\n";
+                }
+            }
+            for(auto itr:all_resturant_customer){
+                if(itr.get_mail()==m){
+                    if(!flag)
+                        cout<<"\nCustomer found";
+                    itr.print_person();
+                    flag=1;
+                    cout<<"\n------------------------------------------------------\n";
+                }
+            }
+            if(flag==0) cout<<"\nNo customer with given email id found";
+        }
+        else{
+            string n;
+            cout<<"\nEnter the name to be searched : ";
+            cin>>n;
+            int flag=0;
+            for(auto itr:all_room_customers){
+                if(itr.get_name().name_val()==n){
+                    if(!flag)
+                        cout<<"\nCustomer found";
+                    itr.print_person();
+                    flag=1;
+                    cout<<"\n------------------------------------------------------\n";
+                }
+            }
+            for(auto itr:all_resturant_customer){
+                if(itr.get_name().name_val()==n){
+                    if(!flag)
+                        cout<<"\nCustomer found";
+                    itr.print_person();
+                    flag=1;
+                    cout<<"\n------------------------------------------------------\n";
+                }
+            }
+            if(flag==0) cout<<"\nNo customer with given name found";
+        }
+    }
 
     void take_order() {}
 
-    void add_employee() {}
+    void add_employee() {
+        cout<<"Enter the details of the employee : ";
+        Employee e;
+
+    }
 
     void remove_employee() {}
 
-    void employee_login(){}
+    void employee_login(){
+
+        cout<<"Enter your employee id : ";
+    }
 };
 
 int main(){
