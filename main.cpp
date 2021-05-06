@@ -34,11 +34,13 @@ class Room {
 protected:
     string room_type;
     int no_of_beds;
-    float rent;
     int room_no;
-    int status;
 
 public:
+    float rent;
+
+    int status;
+
     Room() {}
 
     Room(string room_type,int no_of_beds,float rent,int room_no,int status) {
@@ -206,7 +208,8 @@ public:
         cout<<"Enter check in time : ";
         cin>>check_in_time;
         status = 1;
-        cust_id = x++;
+        cust_id = to_string(x);
+        x++;
     }
 
     int select_choice() {}
@@ -225,6 +228,7 @@ protected:
     float room_bill;
     int book_status;
     Room room;
+    int number_of_days;
 
 public:
     vector<pair<string, float>> services_used;
@@ -232,6 +236,7 @@ public:
     void view_total_bill() {
         float total=0;
         cout<<"Printing the bill of the customer : ";
+        services_used.push_back(make_pair("Room rent",number_of_days*room.rent));
         for(int i=0;i<services_used.size();i++){
             cout<<i+1<<":"<<services_used[i].first<<"---->"<<services_used[i].second<<"\n";
             total+=services_used[i].second;
@@ -242,11 +247,38 @@ public:
         cout<<"Please visit again!!!!\n";
     }
 
-    void allocate_room() {}
+    void allocate_room(map <string,vector<int>> &vacant_room,map <string,vector<int>> &occupied_rooms,vector<Room> rooms) {
+        string s;
+        cout<<"\nEnter the type of room you want : ";
+        cin>>s;
+        int room_no = vacant_room[s][vacant_room[s].size()-1];
+        vacant_room[s].pop_back();
+        occupied_rooms[s].push_back(room_no);
+        room = rooms[room_no];
+        room.status = 1;
+    }
 
-    void print_person() {}
+    void print_person() {
+        cout<<"\nName : ";
+        person_name.get_name();
+        cout<<"\nDOB : ";
+        person_dob.get_date();
+        cout<<"\nPhone number : "<<person_phone;
+        cout<<"\nPerson email id : "<<person_mail;
+        cout<<"\nPerson address : "<<person_addr;
+        cout<<"\nCustomer id : "<<cust_id;
+        cout<<"\nCheck in time : "<<check_in_time;
+        cout<<"\nCurrent status : ";
+        if(status==0) cout<<"Inactive";
+        else cout<<"Active";
+        cout<<"\nNumber of days stayed : "<<number_of_days;
+        cout<<"\nTotal bill : "<<room_bill;
+        room.display_details(room);
+    }
 
     void check_out() {
+        cout<<"\nEnter the number of days stayed : ";
+        cin>>number_of_days;
         view_total_bill();
         status=0;
         book_status = 0;
