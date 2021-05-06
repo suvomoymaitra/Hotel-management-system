@@ -128,10 +128,6 @@ public:
         }
     }
 
-    void take_order() {
-
-    }
-
     void add_dish() {
         string s;
         cout<<"\nEnter the dish type : ";
@@ -283,8 +279,6 @@ public:
         status=0;
         book_status = 0;
     }
-
-    void room_service() {}
 };
 
 class ResturantCustomer : public Customer {
@@ -317,15 +311,27 @@ public:
         book_status = 1;
     }
 
-    void print_person() {}
+    void print_person() {
+        cout<<"\nName : ";
+        person_name.get_name();
+        cout<<"\nDOB : ";
+        person_dob.get_date();
+        cout<<"\nPhone number : "<<person_phone;
+        cout<<"\nPerson email id : "<<person_mail;
+        cout<<"\nPerson address : "<<person_addr;
+        cout<<"\nCustomer id : "<<cust_id;
+        cout<<"\nCheck in time : "<<check_in_time;
+        cout<<"\nCurrent status : ";
+        if(status==0) cout<<"Inactive";
+        else cout<<"Active";
+        cout<<"\nTotal bill : "<<dish_bill;
+    }
 
     void check_out() {
         view_total_bill();
         status=0;
         book_status = 0;
     }
-
-    void order_food() {}
 };
 
 
@@ -366,7 +372,16 @@ public:
 
     RoomServiceEmployee(Name name,string addr,long int ph,string mail,int emp_no,Date d,string role):Employee(name,addr,ph,mail,d,emp_no,role) {}
 
-    virtual void perform_duty(RoomCustomer &R) {
+    virtual void perform_duty(RoomCustomer &R) {}
+};
+
+class Chef : public Employee{
+public:
+    Chef() {}
+
+    Chef(Name name,string addr,long int ph,string mail,int emp_no,Date d,string role):Employee(name,addr,ph,mail,d,emp_no,role) {}
+
+    void perform_duty(RoomCustomer &R) {
         cout<<"1 : order food\n";
         Resturant temp;
         string s,type;
@@ -376,6 +391,7 @@ public:
         while(s!="exit"){
             cout<<"Enter the type : ";
             cin>>type;
+            if(type=="exit"||type=="EXIT") break;
             cout<<"Enter the food name : ";
             cin>>s;
             cout<<"Enter quantity : ";
@@ -383,15 +399,6 @@ public:
             R.services_used.push_back(make_pair("Room service Food : "+s,qty*find(temp.dishes[type].begin(),temp.dishes[type].end(),s)->price));
         }
     }
-};
-
-class Chef : public Employee{
-public:
-    Chef() {}
-
-    Chef(Name name,string addr,long int ph,string mail,int emp_no,Date d,string role):Employee(name,addr,ph,mail,d,emp_no,role) {}
-
-    void perform_duty(RoomCustomer &R) {}
 };
 
 class Waiter : public Employee{
