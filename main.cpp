@@ -213,9 +213,10 @@ class Customer : public Person {
 protected:
     string cust_id;
     string check_in_time;
-    int status;
 
 public:
+    int status;
+
     Customer() {}
 
     void set_data() {
@@ -382,6 +383,10 @@ public:
         cout<<"\nPerson address : "<<person_addr;
     }
 
+    long long int get_emp_id(){
+        return emp_no;
+    }
+
     virtual void perform_duty() {}
 };
 
@@ -487,6 +492,10 @@ protected:
     vector <Waiter> waiters;
     vector <LaundryEmployee> laundry_employees;
     vector <CleaningEmployee> cleaning_employees;
+    vector <Chef> chefs_inactive;
+    vector <Waiter> waiters_inactive;
+    vector <LaundryEmployee> laundry_employees_inactive;
+    vector <CleaningEmployee> cleaning_employees_inactive;
     vector <Room> rooms;
     map <string,vector<int>> vacant_room;
     map <string,vector<int>> occupied_rooms;
@@ -494,8 +503,8 @@ protected:
     vector <RoomCustomer> all_room_customers_inactive;
     vector <ResturantCustomer> all_resturant_customer;
     vector <ResturantCustomer> all_resturant_customer_inactive;
-    vector<int> vacant_tables;
-    vector<int> occupied_tables;
+    vector <int> vacant_tables;
+    vector <int> occupied_tables;
     vector <string> feedbacks;
 
 public:
@@ -637,16 +646,133 @@ public:
     void take_order() {}
 
     void add_employee() {
-        cout<<"Enter the details of the employee : ";
-        Employee e;
-
+        cout<<"\nEnter the role of the employee : ";
+        cout<<"\n1. Waiter";
+        cout<<"\n2. Chef";
+        cout<<"\n3. Laundry employee";
+        cout<<"\n4. Room cleaning employee";
+        int choice;
+        cin>>choice;
+        cout<<"\nEnter details of the employee : ";
+        Name name;
+        string addr;
+        long long int ph;
+        string mail;
+        long long int emp_no;
+        Date dob;
+        string role;
+        cout<<"\nName : ";
+        name.put_name();
+        cout<<"Address : ";
+        cin>>addr;
+        cout<<"phone number : ";
+        cin>>ph;
+        cout<<"Email id : ";
+        cin>>mail;
+        emp_no = y++;
+        cout<<"DOB : ";
+        dob.put_date();
+        cout<<"\n---------------------------------------------------------------------------------------------";
+        cout<<"\nEmployee added sucessfully";
+        if(choice==1){
+            role = "Waiter";
+            Waiter w(name,addr,ph,mail,emp_no,dob,role);
+            waiters.push_back(w);
+            w.print_person();
+        }
+        else if(choice==2){
+            role="Chef";
+            Chef c(name,addr,ph,mail,emp_no,dob,role);
+            chefs.push_back(c);
+            c.print_person();
+        }
+        else if(choice==3){
+            role="Laundry employee";
+            LaundryEmployee l(name,addr,ph,mail,emp_no,dob,role);
+            laundry_employees.push_back(l);
+            l.print_person();
+        }
+        else{
+            role="Cleaning employee";
+            CleaningEmployee c(name,addr,ph,mail,emp_no,dob,role);
+            cleaning_employees.push_back(c);
+            c.print_person();
+        }
     }
 
     void remove_employee() {}
 
     void employee_login(){
-
+        long long int id;
         cout<<"Enter your employee id : ";
+        cin>>id;
+        int flag=0;
+        for(auto itr:chefs){
+            if(itr.get_emp_id()==id){
+                int no;
+                cout<<"Enter the room number : ";
+                cin>>no;
+                if(all_room_customers[no].status==0){
+                    cout<<"Enter valid room number";
+                }
+                else{
+                    itr.perform_duty(all_room_customers[no]);
+                }
+                flag=1;
+                break;
+            }
+        }
+        if(!flag){
+            for(auto itr:waiters){
+                if(itr.get_emp_id()==id){
+                    int no;
+                    cout<<"Enter the table number : ";
+                    cin>>no;
+                    if(all_resturant_customer[no].status==0){
+                        cout<<"Enter valid table number";
+                    }
+                    else{
+                        itr.perform_duty(all_resturant_customer[no]);
+                    }
+                    flag=1;
+                    break;
+                }
+            }
+        }
+        if(!flag){
+            for(auto itr:laundry_employees){
+                if(itr.get_emp_id()==id){
+                    int no;
+                    cout<<"Enter the room number : ";
+                    cin>>no;
+                    if(all_room_customers[no].status==0){
+                        cout<<"Enter valid room number";
+                    }
+                    else{
+                        itr.perform_duty(all_room_customers[no]);
+                    }
+                    flag=1;
+                    break;
+                }
+            }
+        }
+        if(!flag){
+            for(auto itr:cleaning_employees){
+                if(itr.get_emp_id()==id){
+                    int no;
+                    cout<<"Enter the room number : ";
+                    cin>>no;
+                    if(all_room_customers[no].status==0){
+                        cout<<"Enter valid room number";
+                    }
+                    else{
+                        itr.perform_duty(all_room_customers[no]);
+                    }
+                    flag=1;
+                    break;
+                }
+            }
+        }
     }
 };
 
