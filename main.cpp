@@ -773,67 +773,83 @@ public:
         int flag=0;
         for(auto itr:chefs){
             if(itr.get_emp_id()==id){
-                int no;
-                cout<<"Enter the room number : ";
-                cin>>no;
-                if(all_room_customers[no].status==0){
-                    cout<<"Enter valid room number";
-                }
-                else{
-                    itr.perform_duty(all_room_customers[no]);
-                }
                 flag=1;
-                break;
+                while(1){
+                    int no;
+                    cout<<"Enter the room number (-1 to exit) : ";
+                    cin>>no;
+                    if(no==-1) break;
+                    if(all_room_customers[no].status==0){
+                        cout<<"Enter valid room number";
+                    }
+                    else{
+                        itr.perform_duty(all_room_customers[no]);
+                    }
+                    flag=1;
+                    break;
+                }
             }
         }
         if(!flag){
             for(auto itr:waiters){
                 if(itr.get_emp_id()==id){
-                    int no;
-                    cout<<"Enter the table number : ";
-                    cin>>no;
-                    if(all_resturant_customer[no].status==0){
-                        cout<<"Enter valid table number";
+                    while(1){
+                        flag=1;
+                        int no;
+                        cout<<"Enter the table number (-1 to exit): ";
+                        cin>>no;
+                        if(no==-1) break;
+                        if(all_resturant_customer[no].status==0){
+                            cout<<"Enter valid table number";
+                        }
+                        else{
+                            itr.perform_duty(all_resturant_customer[no]);
+                        }
+                        flag=1;
+                        break;
                     }
-                    else{
-                        itr.perform_duty(all_resturant_customer[no]);
-                    }
-                    flag=1;
-                    break;
                 }
             }
         }
         if(!flag){
             for(auto itr:laundry_employees){
                 if(itr.get_emp_id()==id){
-                    int no;
-                    cout<<"Enter the room number : ";
-                    cin>>no;
-                    if(all_room_customers[no].status==0){
-                        cout<<"Enter valid room number";
-                    }
-                    else{
-                        itr.perform_duty(all_room_customers[no]);
-                    }
                     flag=1;
-                    break;
+                    while(1){
+                        int no;
+                        cout<<"Enter the room number (-1 to exit): ";
+                        cin>>no;
+                        if(no==-1) break;
+                        if(all_room_customers[no].status==0){
+                            cout<<"Enter valid room number";
+                        }
+                        else{
+                            itr.perform_duty(all_room_customers[no]);
+                        }
+                        flag=1;
+                        break;
+                    }
                 }
             }
         }
         if(!flag){
             for(auto itr:cleaning_employees){
                 if(itr.get_emp_id()==id){
-                    int no;
-                    cout<<"Enter the room number : ";
-                    cin>>no;
-                    if(all_room_customers[no].status==0){
-                        cout<<"Enter valid room number";
-                    }
-                    else{
-                        itr.perform_duty(all_room_customers[no]);
-                    }
                     flag=1;
-                    break;
+                    while(1){
+                        int no;
+                        cout<<"Enter the room number (-1 to exit): ";
+                        cin>>no;
+                        if(no==-1) break;
+                        if(all_room_customers[no].status==0){
+                            cout<<"Enter valid room number";
+                        }
+                        else{
+                            itr.perform_duty(all_room_customers[no]);
+                        }
+                        flag=1;
+                        break;
+                    }
                 }
             }
         }
