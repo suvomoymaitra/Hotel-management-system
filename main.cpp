@@ -700,7 +700,71 @@ public:
         }
     }
 
-    void remove_employee() {}
+    void remove_employee() {
+        int choice;
+        long long int emp_id;
+        int flag=0;
+        cout<<"\nEnter the role of the employee : ";
+        cout<<"\n1. Chef";
+        cout<<"\n2. Waiter";
+        cout<<"\n3. Laundry employee";
+        cout<<"\n4. Cleaning employee";
+        cin>>choice;
+        cout<<"\nEnter the employee id of the employee : ";
+        cin>>emp_id;
+        if(choice==1){
+            auto itr=chefs.begin();
+            for(;itr!=chefs.end();itr++){
+                if(itr->get_emp_id()==emp_id) break;
+            }
+            if(itr==chefs.end()){
+                cout<<"No employee found with given employee id";
+            }
+            else{
+                chefs_inactive.push_back(*itr);
+                chefs.erase(itr);
+            }
+        }
+        else if(choice==2){
+            auto itr=waiters.begin();
+            for(;itr!=waiters.end();itr++){
+                if(itr->get_emp_id()==emp_id) break;
+            }
+            if(itr==waiters.end()){
+                cout<<"No employee found with given employee id";
+            }
+            else{
+                waiters_inactive.push_back(*itr);
+                waiters.erase(itr);
+            }
+        }
+        else if(choice==3){
+            auto itr=laundry_employees.begin();
+            for(;itr!=laundry_employees.end();itr++){
+                if(itr->get_emp_id()==emp_id) break;
+            }
+            if(itr==laundry_employees.end()){
+                cout<<"No employee found with given employee id";
+            }
+            else{
+                laundry_employees_inactive.push_back(*itr);
+                laundry_employees.erase(itr);
+            }
+        }
+        else{
+            auto itr=cleaning_employees.begin();
+            for(;itr!=cleaning_employees.end();itr++){
+                if(itr->get_emp_id()==emp_id) break;
+            }
+            if(itr==cleaning_employees.end()){
+                cout<<"No employee found with given employee id";
+            }
+            else{
+                cleaning_employees_inactive.push_back(*itr);
+                cleaning_employees.erase(itr);
+            }
+        }
+    }
 
     void employee_login(){
         long long int id;
