@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+
 long long int x=1;
 long long int y=1;
 
@@ -324,7 +325,7 @@ public:
 
     void allocate_table(vector<int> vacant, vector<int> occupied) {
         set_data();
-        cout<<"Your table number is : "<<vacant[vacant.size()-1];;
+        cout<<"Your table number is : "<<vacant[vacant.size()-1];
         occupied.push_back(vacant[vacant.size()-1]);
         table_no = occupied[occupied.size()-1];
         vacant.pop_back();
@@ -497,6 +498,7 @@ protected:
     vector <LaundryEmployee> laundry_employees_inactive;
     vector <CleaningEmployee> cleaning_employees_inactive;
     vector <Room> rooms;
+    Resturant R;
     map <string,vector<int>> vacant_room;
     map <string,vector<int>> occupied_rooms;
     vector <RoomCustomer> all_room_customers;
@@ -510,11 +512,11 @@ protected:
 public:
     Hotel() {}
 
-    Hotel get_hotel() {}
-
     void generate_id() {}
 
-    void set_hotel(Resturant,Room) {}
+    void set_hotel(Resturant tmp,Room room) {
+        R=tmp;
+    }
 
     void get_room() {}
 
