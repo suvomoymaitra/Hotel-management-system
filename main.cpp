@@ -38,13 +38,12 @@ public:
 
 class Room {
 protected:
-    string room_type;
     int no_of_beds;
     int room_no;
 
 public:
+    string room_type;
     float rent;
-
     int status;
 
     Room() {}
@@ -55,6 +54,10 @@ public:
         this->rent = rent;
         this->room_no = room_no;
         this->status = status;
+    }
+
+    int get_room_no(){
+        return room_no;
     }
 
     void set_room() {
@@ -512,8 +515,15 @@ public:
 
     void generate_id() {}
 
-    void set_hotel(Resturant tmp,Room room) {
+    void set_hotel(Resturant tmp,vector<Room> room) {
+        hotel_name="greedy_dp_hotel";
+        hotel_address="jhfsdgvjsfdhgskdcsh,dcgds,hvdf,hvdffh";
         R=tmp;
+        rooms=room;
+        for(auto itr:rooms){
+            vacant_room[itr.room_type].push_back(itr.get_room_no());
+        }
+        for(int i=1;i<=100;i++) vacant_tables.push_back(i);
     }
 
     void get_room() {}
