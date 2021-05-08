@@ -139,6 +139,11 @@ public:
         }
     }
 
+    void add_dish_ctime(string type,string name,float price){
+        Dish temp(name,price,type);
+        dishes[type].push_back(temp);
+    }
+
     void add_dish() {
         string s;
         cout<<"\nEnter the dish type : ";
@@ -456,6 +461,7 @@ public:
                 while(s!="exit"){
                     cout<<"Enter the type : ";
                     cin>>type;
+                    if(type=="exit"||type=="EXIT") break;
                     cout<<"Enter the food name : ";
                     cin>>s;
                     cout<<"Enter quantity : ";
@@ -619,6 +625,10 @@ public:
         cout<<"\nEnter your feedback : ";
         cin>>s;
         feedbacks.push_back(s);
+    }
+
+    void add_dish(){
+        R.add_dish();
     }
 
     void get_customer_data() {
@@ -943,6 +953,86 @@ public:
 };
 
 int main(){
+    Resturant R;
+    /// All time favourites
+    R.add_dish_ctime("All time favourites","French fries",106);
+    R.add_dish_ctime("All time favourites","Chilli cheese toast",115);
+    R.add_dish_ctime("All time favourites","Chilli cheese garlic toast",115);
+    R.add_dish_ctime("All time favourites","Garlic bread",98);
+    R.add_dish_ctime("All time favourites","Garlic bread with cheese",119);
 
+    /// Sandwich
+    R.add_dish_ctime("Sandwich","Plain sandwich",175);
+    R.add_dish_ctime("Sandwich","Grilled sandwich",175);
+    R.add_dish_ctime("Sandwich","Club sandwich",175);
+
+    /// South Indian
+    R.add_dish_ctime("South Indian","Rice idli",50);
+    R.add_dish_ctime("South Indian","Sambhar vada",55);
+    R.add_dish_ctime("South Indian","Dahi vada",45);
+
+    /// Dosas
+    R.add_dish_ctime("Dosa","Plain Dosa (Butter)",125);
+    R.add_dish_ctime("Dosa","Onion dosa (Butter)",136);
+    R.add_dish_ctime("Dosa","Paper dosa",130);
+    R.add_dish_ctime("Dosa","Mysore dosa",123);
+    R.add_dish_ctime("Dosa","Rawa dosa",119);
+    R.add_dish_ctime("Dosa","Onion rawa dosa",136);
+    R.add_dish_ctime("Dosa","Masala dosa (Butter)",136);
+
+    /// Pizza
+    R.add_dish_ctime("Pizza","Plain cheese pizza",190);
+    R.add_dish_ctime("Pizza","Capsicum onion pizza",210);
+    R.add_dish_ctime("Pizza","Tomato onion pizza",210);
+    R.add_dish_ctime("Pizza","Capsicum onion mushroom pizza",250);
+    R.add_dish_ctime("Pizza","Jain special pizza",250);
+    R.add_dish_ctime("Pizza","Tandoori pizza",250);
+    R.add_dish_ctime("Pizza","Super veggie pizza",265);
+
+    /// Soups
+    R.add_dish_ctime("Soup","Hot & soup",109);
+    R.add_dish_ctime("Soup","Lemon & coriander",109);
+    R.add_dish_ctime("Soup","Veg noodle soup",109);
+    R.add_dish_ctime("Soup","Sweet corn",109);
+    R.add_dish_ctime("Soup","Veg munchow",109);
+    R.add_dish_ctime("Soup","Veg clear soup",109);
+
+    /// Starters
+    R.add_dish_ctime("Starters","Spring roll",145);
+    R.add_dish_ctime("Starters","Chilly paneer dry",195);
+    R.add_dish_ctime("Starters","Veg manchurian dry",153);
+    R.add_dish_ctime("Starters","Potatoes in honey & chilly",175);
+    R.add_dish_ctime("Starters","Fired vegetables in salt & pepper",190);
+    R.add_dish_ctime("Starters","Crispy spinach & baby corn",198);
+    R.add_dish_ctime("Starters","Chilly mushroom dry",193);
+
+    /// Main course
+    R.add_dish_ctime("Main course","Sahi paneer",210);
+    R.add_dish_ctime("Main course","Kadhai paneer",210);
+    R.add_dish_ctime("Main course","Paneer butter masala",210);
+    R.add_dish_ctime("Main course","Mushroom masala",215);
+    R.add_dish_ctime("Main course","Malai kofta",210);
+    R.add_dish_ctime("Main course","Dal makhani",192);
+    R.add_dish_ctime("Main course","Yellow dal",141);
+    R.add_dish_ctime("Main course","Rajma",141);
+    R.add_dish_ctime("Main course","Chole",141);
+
+    /// Breads
+    R.add_dish_ctime("Breads","Tandoori roti",30);
+    R.add_dish_ctime("Breads","Roomali roti",17);
+    R.add_dish_ctime("Breads","Butter roti",36);
+    R.add_dish_ctime("Breads","Plain naan",43);
+    R.add_dish_ctime("Breads","Butter naan",58);
+    R.add_dish_ctime("Breads","Garlic naan butter",60);
+    R.add_dish_ctime("Breads","Tawa parantha",53);
+    R.add_dish_ctime("Breads","Laccha parantha",53);
+    R.add_dish_ctime("Breads","Pudina parantha",53);
+    R.add_dish_ctime("Breads","Stuffed kulcha (aloo)",65);
+    R.add_dish_ctime("Breads","Stuffed kulcha (paneer)",65);
+    R.add_dish_ctime("Breads","Stuffed kulcha (onion)",65);
+    R.add_dish_ctime("Breads","Papad",15);
+
+    /// Rice
+    R.add_dish_ctime("Rice","Steam rice",161);
     return 0;
 }
