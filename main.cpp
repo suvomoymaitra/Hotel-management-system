@@ -406,9 +406,8 @@ public:
 
     Chef(Name name,string addr,long int ph,string mail,long long int emp_no,Date d,string role):RoomServiceEmployee(name,addr,ph,mail,emp_no,d,role) {}
 
-    void perform_duty(RoomCustomer &R) {
+    void perform_duty(RoomCustomer &R,Resturant temp) {
         cout<<"1 : order food\n";
-        Resturant temp;
         string s,type;
         int qty;
         temp.display_menu();
@@ -432,10 +431,9 @@ public:
 
     Waiter(Name name,string addr,long int ph,string mail,long long int emp_no,Date d,string role):Employee(name,addr,ph,mail,d,emp_no,role) {}
 
-    void perform_duty(ResturantCustomer &R) {
+    void perform_duty(ResturantCustomer &R,Resturant temp) {
         cout<<"1 : order food\n";
         cout<<"2 : Check out\n";
-        Resturant temp;
         string s,type;
         int qty;
         int ch=0;
@@ -785,7 +783,7 @@ public:
                         cout<<"Enter valid room number";
                     }
                     else{
-                        itr.perform_duty(all_room_customers[no]);
+                        itr.perform_duty(all_room_customers[no],R);
                     }
                     flag=1;
                     break;
@@ -805,7 +803,7 @@ public:
                             cout<<"Enter valid table number";
                         }
                         else{
-                            itr.perform_duty(all_resturant_customer[no]);
+                            itr.perform_duty(all_resturant_customer[no],R);
                         }
                         flag=1;
                         break;
