@@ -589,11 +589,25 @@ public:
     }
 
     void display_owner_menu() {
-
+        cout<<"\nEnter your choice : ";
+        cout<<"\n1. Add employee";
+        cout<<"\n2. Remove employee";
+        cout<<"\n3. Get a customer data";
+        int choice;
+        cin>>choice;
+        if(choice==1){
+            add_employee();
+        }
+        else if(choice==2){
+            remove_employee();
+        }
+        else{
+            get_customer_data();
+        }
     }
 
     void display_employee_menu() {
-
+        employee_login();
     }
 
     void vacate_room() {
@@ -716,8 +730,6 @@ public:
             if(flag==0) cout<<"\nNo customer with given name found";
         }
     }
-
-    void take_order() {}
 
     void add_employee() {
         cout<<"\nEnter the role of the employee : ";
