@@ -296,6 +296,10 @@ public:
         room.display_details(room);
     }
 
+    Room get_room(){
+        return room;
+    }
+
     void check_out() {
         cout<<"\nEnter the number of days stayed : ";
         cin>>number_of_days;
@@ -326,7 +330,11 @@ public:
         cout<<"Please visit again!!!!\n";
     }
 
-    void allocate_table(vector<int> vacant, vector<int> occupied) {
+    int get_table_no(){
+        return table_no;
+    }
+
+    void allocate_table(vector<int> &vacant, vector<int> &occupied) {
         set_data();
         cout<<"Your table number is : "<<vacant[vacant.size()-1];
         occupied.push_back(vacant[vacant.size()-1]);
@@ -526,15 +534,71 @@ public:
         for(int i=1;i<=100;i++) vacant_tables.push_back(i);
     }
 
-    void get_room() {}
+    void get_room() {
+        cout<<"\nEnter the person details : ";
+        RoomCustomer tmp;
+        tmp.set_data();
+        tmp.allocate_room(vacant_room,occupied_rooms,rooms);
+        all_room_customers.push_back(tmp);
+    }
 
-    void get_table() {}
+    void get_table() {
+        cout<<"\nEnter the person details : ";
+        ResturantCustomer tmp;
+        tmp.set_data();
+        tmp.allocate_table(vacant_tables,occupied_tables);
+        all_resturant_customer.push_back(tmp);
+    }
 
-    void display_available() {}
+    void room_customer_check_out(){
+        cout<<"Enter the customer id : ";
+        string id;
+        Room temp;
+        cin>>id;
+        for(auto itr : all_room_customers){
+            if(id==itr.get_cust_id()){
+                itr.check_out();
+                temp=itr.get_room();
+                break;
+            }
+        }
+        vacant_room[temp.room_type].push_back(temp.get_room_no());
+        auto itr1=occupied_rooms[temp.room_type].begin();
+        auto itr2=occupied_rooms[temp.room_type].end();
+        occupied_rooms[temp.room_type].erase(find(itr1,itr2,temp.get_room_no()));
+        ask_feed_back();
+    }
 
-    void display_menu() {}
+    void resturant_customer_check_out(){
+        cout<<"Enter the customer id : ";
+        string id;
+        int temp;
+        cin>>id;
+        for(auto itr : all_resturant_customer){
+            if(id==itr.get_cust_id()){
+                itr.check_out();
+                temp=itr.get_table_no();
+                break;
+            }
+        }
+        vacant_tables.push_back(temp);
+        auto itr1=occupied_tables.begin();
+        auto itr2=occupied_tables.end();
+        occupied_tables.erase(find(itr1,itr2,temp));
+        ask_feed_back();
+    }
 
-    void vacate_room() {}
+    void display_owner_menu() {
+
+    }
+
+    void display_employee_menu() {
+
+    }
+
+    void vacate_room() {
+        room_customer_check_out();
+    }
 
     void ask_feed_back() {
         string s;
