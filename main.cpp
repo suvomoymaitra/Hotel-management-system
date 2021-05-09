@@ -1,3 +1,4 @@
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -173,7 +174,7 @@ class Person {
 protected:
     Name person_name;
     string person_addr;
-    long int person_phone;
+    long long int person_phone;
     string person_mail;
     Date person_dob;
 
