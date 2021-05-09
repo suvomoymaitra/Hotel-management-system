@@ -1186,41 +1186,41 @@ int main() {
 
     /// Chef
 
-    n.set_name("Vihaan Singh");
+    n.set_name("Vihaan_Singh");
     d.set_date(28, 11, 1995);
     H.add_chef(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Chef");
 
-    n.set_name("Ashutosh Parekh");
+    n.set_name("Ashutosh_Parekh");
     d.set_date(31, 5, 1996);
     H.add_chef(n, "#56,Rajeevnagar,Hubballi", 8457961233, "ashupk55@gmail.com", y++, d, "Chef");
 
-    n.set_name("Rahul Aryan");
+    n.set_name("Rahul_Aryan");
     d.set_date(24, 5, 1996);
     H.add_chef(n, "#452,Gandhinagar,Dharwad", 7758899663, "raryan16@gmail.com", y++, d, "Chef");
 
-    n.set_name("Avik G");
+    n.set_name("Avik_G");
     d.set_date(27, 11, 1995);
     H.add_chef(n, "#44,Keshwapur,Hubballi", 9445833267, "avikg28@gmail.com", y++, d, "Chef");
 
-    n.set_name("Jay Dixit");
+    n.set_name("Jay_Dixit");
     d.set_date(16, 6, 1994);
     H.add_chef(n, "#852,Akshay Park,Hubballi", 9463092047, "jayd13@gmail.com", y++, d, "Chef");
 
-    n.set_name("Yash Mehta");
+    n.set_name("Yash_Mehta");
     d.set_date(23, 10, 1994);
     H.add_chef(n, "#22,Renuka Nagar,Hubballi", 8889993625, "yashmehta27@gmail.com", y++, d, "Chef");
 
-    n.set_name("Kartik Raikar");
+    n.set_name("Kartik_Raikar");
     d.set_date(17, 8, 1994);
     H.add_chef(n, "#112,CBT,Dharwad", 7458962366, "kraikar21@gmail.com", y++, d, "Chef");
 
-    n.set_name("Aarav Kumar");
+    n.set_name("Aarav_Kumar");
     d.set_date(13, 12, 1996);
     H.add_chef(n, "#444,Vidyanagar,Hubballi", 9874563214, "aaravk15@gmail.com", y++, d, "Chef");
 
     /// Waiter
 
-    n.set_name("Vineet Bhatt");
+    n.set_name("Vineet_Bhatt");
     d.set_date(25, 4, 1997);
     H.add_waiter(n, "#236,Vijaynagar,Hubballi", 6325669874, "vineetb17@gmail.com", y++, d, "Waiter");
 
