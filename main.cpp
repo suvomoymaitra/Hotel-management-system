@@ -19,6 +19,10 @@ public:
     void put_name() {
         cin >> name;
     }
+
+    void set_name(string s){
+        name=s;
+    }
 };
 
 class Date {
@@ -33,6 +37,12 @@ public:
 
     void put_date() {
         cin >> dd >> mm >> yyyy;
+    }
+
+    void set_date(int d,int m,int yy){
+        dd=d;
+        mm=m;
+        yyyy=yy;
     }
 };
 
@@ -529,14 +539,10 @@ public:
 
     void generate_id() {}
 
-    void set_hotel(Resturant tmp,vector<Room> room) {
+    void set_hotel(Resturant tmp) {
         hotel_name="greedy_dp_hotel";
         hotel_address="jhfsdgvjsfdhgskdcsh,dcgds,hvdf,hvdffh";
         R=tmp;
-        rooms=room;
-        for(auto itr:rooms){
-            vacant_room[itr.room_type].push_back(itr.get_room_no());
-        }
         for(int i=1;i<=100;i++) vacant_tables.push_back(i);
     }
 
@@ -796,6 +802,26 @@ public:
         }
     }
 
+    void add_chef(Name name,string addr,long long int ph,string mail,long long int emp_no,Date dob,string role){
+        Chef c(name,addr,ph,mail,emp_no,dob,role);
+        chefs.push_back(c);
+    }
+
+    void add_waiter(Name name,string addr,long long int ph,string mail,long long int emp_no,Date dob,string role){
+        Waiter w(name,addr,ph,mail,emp_no,dob,role);
+        waiters.push_back(w);
+    }
+
+    void add_room_cleaning(Name name,string addr,long long int ph,string mail,long long int emp_no,Date dob,string role){
+        CleaningEmployee c(name,addr,ph,mail,emp_no,dob,role);
+        cleaning_employees.push_back(c);
+    }
+
+    void add_laundry(Name name,string addr,long long int ph,string mail,long long int emp_no,Date dob,string role){
+        LaundryEmployee l(name,addr,ph,mail,emp_no,dob,role);
+        laundry_employees.push_back(l);
+    }
+
     void remove_employee() {
         int choice;
         long long int emp_id;
@@ -953,6 +979,9 @@ public:
 };
 
 int main(){
+
+    ///--------------------------------------------Resturant------------------------------------------------------------
+
     Resturant R;
     /// All time favourites
     R.add_dish_ctime("All time favourites","French fries",106);
@@ -1034,5 +1063,154 @@ int main(){
 
     /// Rice
     R.add_dish_ctime("Rice","Steam rice",161);
+
+
+
+    ///--------------------------------------------Employee-------------------------------------------------------------
+    Hotel H;
+    H.set_hotel(R);
+    Name n;
+    Date d;
+
+    /// Chef
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Chef");
+
+    n.set_name("Ashutosh Parekh");
+    d.set_date(31,5,1996);
+    H.add_chef(n,"#56,Rajeevnagar,Hubballi",8457961233,"ashupk55@gmail.com",y++,d,"Chef");
+
+    n.set_name("Rahul Aryan");
+    d.set_date(24,5,1996);
+    H.add_chef(n,"#452,Gandhinagar,Dharwad",7758899663,"raryan16@gmail.com",y++,d,"Chef");
+
+    n.set_name("Avik G");
+    d.set_date(27,11,1995);
+    H.add_chef(n,"#44,Keshwapur,Hubballi",9445833267,"avikg28@gmail.com",y++,d,"Chef");
+
+    n.set_name("Jay Dixit");
+    d.set_date(16,6,1994);
+    H.add_chef(n,"#852,Akshay Park,Hubballi",9463092047,"jayd13@gmail.com",y++,d,"Chef");
+
+    n.set_name("Yash Mehta");
+    d.set_date(23,10,1994);
+    H.add_chef(n,"#22,Renuka Nagar,Hubballi",8889993625,"yashmehta27@gmail.com",y++,d,"Chef");
+
+    n.set_name("Kartik Raikar");
+    d.set_date(17,8,1994);
+    H.add_chef(n,"#112,CBT,Dharwad",7458962366,"kraikar21@gmail.com",y++,d,"Chef");
+
+    n.set_name("Aarav Kumar");
+    d.set_date(13,12,1996);
+    H.add_chef(n,"#444,Vidyanagar,Hubballi",9874563214,"aaravk15@gmail.com",y++,d,"Chef");
+
+    /// Waiter
+
+    n.set_name("Vineet Bhatt");
+    d.set_date(25,4,1997);
+    H.add_chef(n,"#236,Vijaynagar,Hubballi",6325669874,"vineetb17@gmail.com",y++,d,"Waiter");
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Waiter");
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Waiter");
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Waiter");
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Waiter");
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Waiter");
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Waiter");
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Waiter");
+
+
+    /// Laundry employee
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
+
+
+    /// Cleaning employee
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
+
+    n.set_name("Vihaan Singh");
+    d.set_date(28,11,1995);
+    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
+
+
+    H.display_employee_menu();
     return 0;
 }
