@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -121,6 +120,10 @@ public:
     void get_dish() {
         cout<<dish_name<<" "<<price<<"\n";
     }
+
+    string get_dish_name(){
+        return dish_name;
+    }
 };
 
 class Veg : public Dish{
@@ -143,10 +146,13 @@ public:
 
     void display_menu() {
         cout<<"\n-----------------------------------------Menu---------------------------------------------------------";
-        cout<<"\n------------------------------------------------------------------------------------------------------";
+        cout<<"\n------------------------------------------------------------------------------------------------------\n";
         for(auto itr : dishes){
-            cout<<itr.first<<"\n";
+            cout<<itr.first<<":\n";
+            for(int i=0;i<itr.first.size();i++) cout<<"-";
+            cout<<"\n";
             for(auto it : itr.second) it.get_dish();
+            cout<<"\n";
         }
     }
 
@@ -224,6 +230,7 @@ public:
         cout<<"\nPerson address : "<<person_addr;
     }
 };
+
 
 /// Customer classes
 ///---------------------------------------------------------------------------------------------------------------------
@@ -383,6 +390,7 @@ public:
 };
 
 
+
 ///Employee classes
 ///---------------------------------------------------------------------------------------------------------------------
 
@@ -447,7 +455,12 @@ public:
             cin>>s;
             cout<<"Enter quantity : ";
             cin>>qty;
-            R.services_used.push_back(make_pair("Room service Food : "+s,qty*find(temp.dishes[type].begin(),temp.dishes[type].end(),s)->price));
+            auto itr = temp.dishes[type].begin();
+            for(;itr!=temp.dishes[type].end();itr++)
+                if(s==itr->get_dish_name())
+                    break;
+            R.services_used.push_back(make_pair("Room service Food : "+s,qty*itr->price));
+//            R.services_used.push_back(make_pair("Room service Food : "+s,qty*(find(temp.dishes[type].begin(),temp.dishes[type].end(),s)->price)));
         }
     }
 };
@@ -465,23 +478,27 @@ public:
         int qty;
         int ch=0;
         cin>>ch;
-        switch(ch){
-            case 1:
-                temp.display_menu();
-                cout<<"\nEnter the names of the foods you want to order : ";
-                while(s!="exit"){
-                    cout<<"Enter the type : ";
-                    cin>>type;
-                    if(type=="exit"||type=="EXIT") break;
-                    cout<<"Enter the food name : ";
-                    cin>>s;
-                    cout<<"Enter quantity : ";
-                    cin>>qty;
-                    R.food_ordered.push_back(make_pair(s,qty*find(temp.dishes[type].begin(),temp.dishes[type].end(),s)->price));
-                }
-                break;
-            case 2:
-                R.check_out();
+        if(ch==1){
+            temp.display_menu();
+            cout<<"\nEnter the names of the foods you want to order : ";
+            while(s!="exit"){
+                cout<<"Enter the type : ";
+                cin>>type;
+                if(type=="exit"||type=="EXIT") break;
+                cout<<"Enter the food name : ";
+                cin>>s;
+                cout<<"Enter quantity : ";
+                cin>>qty;
+                auto itr = temp.dishes[type].begin();
+                for(;itr!=temp.dishes[type].end();itr++)
+                    if(s==itr->get_dish_name())
+                        break;
+                R.food_ordered.push_back(make_pair(s,qty*itr->price));
+//                R.food_ordered.push_back(make_pair(s,qty*find(temp.dishes[type].begin(),temp.dishes[type].end(),s)->price));
+            }
+        }
+        else{
+            R.check_out();
         }
     }
 };
@@ -1210,8 +1227,5 @@ int main(){
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
     H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
-
-
-    H.display_employee_menu();
     return 0;
 }
