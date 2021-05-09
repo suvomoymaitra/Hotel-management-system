@@ -278,7 +278,7 @@ public:
 
     void view_total_bill() {
         float total=0;
-        cout<<"Printing the bill of the customer : ";
+        cout<<"\nPrinting the bill of the customer : \n";
         services_used.push_back(make_pair("Room rent",number_of_days*room.rent));
         for(int i=0;i<services_used.size();i++){
             cout<<i+1<<":"<<services_used[i].first<<"---->"<<services_used[i].second<<"\n";
@@ -291,14 +291,25 @@ public:
     }
 
     void allocate_room(map <string,vector<int>> &vacant_room,map <string,vector<int>> &occupied_rooms,vector<Room> rooms) {
-        string s;
+        for(auto itr:vacant_room){
+            cout<<itr.first<<" "<<itr.second.size()<<"\n";
+        }
+        char s[200];
         cout<<"\nEnter the type of room you want : ";
         cin>>s;
+        cout<<s;
+        if(vacant_room[s].size()==0){
+            cout<<"Enter valid room type";
+            return;
+        }
         int room_no = vacant_room[s][vacant_room[s].size()-1];
+        room_no = vacant_room[s].back();
         vacant_room[s].pop_back();
         occupied_rooms[s].push_back(room_no);
         room = rooms[room_no];
         room.status = 1;
+        room_bill=0;
+        number_of_days=0;
     }
 
     void print_person() {
@@ -324,6 +335,10 @@ public:
     }
 
     void check_out() {
+        if(status==0){
+            cout<<"Customer inactive";
+            return;
+        }
         cout<<"\nEnter the number of days stayed : ";
         cin>>number_of_days;
         view_total_bill();
@@ -342,7 +357,7 @@ public:
 
     void view_total_bill() {
         float total=0;
-        cout<<"Printing the bill of the customer : ";
+        cout<<"\nPrinting the bill of the customer : \n";
         for(int i=0;i<food_ordered.size();i++){
             cout<<i+1<<":"<<food_ordered[i].first<<"---->"<<food_ordered[i].second<<"\n";
             total+=food_ordered[i].second;
@@ -364,6 +379,7 @@ public:
         table_no = occupied[occupied.size()-1];
         vacant.pop_back();
         book_status = 1;
+        dish_bill=0;
     }
 
     void print_person() {
@@ -442,6 +458,7 @@ public:
     Chef(Name name,string addr,long int ph,string mail,long long int emp_no,Date d,string role):RoomServiceEmployee(name,addr,ph,mail,emp_no,d,role) {}
 
     void perform_duty(RoomCustomer &R,Resturant temp) {
+        cout<<"\n-----------------------------------------------------------------\n";
         cout<<"1 : order food\n";
         string s,type;
         int qty;
@@ -450,7 +467,7 @@ public:
         while(s!="exit"){
             cout<<"Enter the type : ";
             cin>>type;
-            if(type=="exit"||type=="EXIT") break;
+            if(type=="exit"||type=="EXIT") return;
             cout<<"Enter the food name : ";
             cin>>s;
             cout<<"Enter quantity : ";
@@ -472,6 +489,7 @@ public:
     Waiter(Name name,string addr,long int ph,string mail,long long int emp_no,Date d,string role):Employee(name,addr,ph,mail,d,emp_no,role) {}
 
     void perform_duty(ResturantCustomer &R,Resturant temp) {
+        cout<<"\n-----------------------------------------------------------------\n";
         cout<<"1 : order food\n";
         cout<<"2 : Check out\n";
         string s,type;
@@ -484,7 +502,7 @@ public:
             while(s!="exit"){
                 cout<<"Enter the type : ";
                 cin>>type;
-                if(type=="exit"||type=="EXIT") break;
+                if(type=="exit"||type=="EXIT") return;
                 cout<<"Enter the food name : ";
                 cin>>s;
                 cout<<"Enter quantity : ";
@@ -562,6 +580,32 @@ public:
         hotel_address="jhfsdgvjsfdhgskdcsh,dcgds,hvdf,hvdffh";
         R=tmp;
         for(int i=1;i<=100;i++) vacant_tables.push_back(i);
+        int i=0;
+        for(;i<30;i++){
+            Room r("Single",1,1500,i,0);
+            rooms.push_back(r);
+            vacant_room["Single"].push_back(i);
+        }
+        for(;i<60;i++){
+            Room r("Double",2,2000,i,0);
+            rooms.push_back(r);
+            vacant_room["Double"].push_back(i);
+        }
+        for(;i<90;i++){
+            Room r("Triple",3,3000,i,0);
+            rooms.push_back(r);
+            vacant_room["Triple"].push_back(i);
+        }
+        for(;i<120;i++){
+            Room r("Quad",4,4500,i,0);
+            rooms.push_back(r);
+            vacant_room["Quad"].push_back(i);
+        }
+        for(;i<150;i++){
+            Room r("Deluxe",1,4800,i,0);
+            rooms.push_back(r);
+            vacant_room["Deluxe"].push_back(i);
+        }
     }
 
     void get_room() {
@@ -618,22 +662,28 @@ public:
         ask_feed_back();
     }
 
-    void display_owner_menu() {
-        cout<<"\nEnter your choice : ";
+    bool display_owner_menu() {
+        cout<<"\n\n";
         cout<<"\n1. Add employee";
         cout<<"\n2. Remove employee";
         cout<<"\n3. Get a customer data";
+        cout<<"\nAny other number to go out of owner menu";
+        cout<<"\nEnter your choice : ";
         int choice;
         cin>>choice;
         if(choice==1){
             add_employee();
+            return true;
         }
         else if(choice==2){
             remove_employee();
+            return true;
         }
-        else{
+        else if(choice==3){
             get_customer_data();
+            return true;
         }
+        else return false;
     }
 
     void display_employee_menu() {
@@ -906,9 +956,10 @@ public:
         }
     }
 
-    void employee_login(){
+    bool employee_login(){
         long long int id;
-        cout<<"Enter your employee id : ";
+        cout<<"\n-----------------------------------------------------------------\n";
+        cout<<"\nEnter your employee id : ";
         cin>>id;
         int flag=0;
         for(auto itr:chefs){
@@ -916,11 +967,11 @@ public:
                 flag=1;
                 while(1){
                     int no;
-                    cout<<"Enter the room number (-1 to exit) : ";
+                    cout<<"\nEnter the customer number (-1 to exit) : ";
                     cin>>no;
-                    if(no==-1) break;
+                    if(no==-1) return false;
                     if(all_room_customers[no].status==0){
-                        cout<<"Enter valid room number";
+                        cout<<"\nEnter valid customer number\n";
                     }
                     else{
                         itr.perform_duty(all_room_customers[no],R);
@@ -936,11 +987,11 @@ public:
                     while(1){
                         flag=1;
                         int no;
-                        cout<<"Enter the table number (-1 to exit): ";
+                        cout<<"Enter the customer number (-1 to exit): ";
                         cin>>no;
-                        if(no==-1) break;
+                        return false;
                         if(all_resturant_customer[no].status==0){
-                            cout<<"Enter valid table number";
+                            cout<<"Enter valid customer number";
                         }
                         else{
                             itr.perform_duty(all_resturant_customer[no],R);
@@ -957,11 +1008,11 @@ public:
                     flag=1;
                     while(1){
                         int no;
-                        cout<<"Enter the room number (-1 to exit): ";
+                        cout<<"Enter the customer number (-1 to exit): ";
                         cin>>no;
-                        if(no==-1) break;
+                        return false;
                         if(all_room_customers[no].status==0){
-                            cout<<"Enter valid room number";
+                            cout<<"Enter valid customer number";
                         }
                         else{
                             itr.perform_duty(all_room_customers[no]);
@@ -978,11 +1029,11 @@ public:
                     flag=1;
                     while(1){
                         int no;
-                        cout<<"Enter the room number (-1 to exit): ";
+                        cout<<"Enter the customer number (-1 to exit): ";
                         cin>>no;
-                        if(no==-1) break;
+                        return false;
                         if(all_room_customers[no].status==0){
-                            cout<<"Enter valid room number";
+                            cout<<"Enter valid customer number";
                         }
                         else{
                             itr.perform_duty(all_room_customers[no]);
@@ -993,8 +1044,39 @@ public:
                 }
             }
         }
+        return true;
+    }
+
+    bool receptionist(){
+        int choice;
+        cout<<"\n1.Room check in";
+        cout<<"\n2.Room check out";
+        cout<<"\n3.Resturant check in";
+        cout<<"\n4.Resturant check out";
+        cout<<"\nAny other number to exit";
+        cout<<"\nEnter your choice :";
+        cin>>choice;
+        if(choice==1){
+            get_room();
+            return true;
+        }
+        else if(choice==2){
+            room_customer_check_out();
+            return true;
+        }
+        else if(choice==3){
+            get_table();
+            return true;
+        }
+        else if(choice==4){
+            resturant_customer_check_out();
+            return true;
+        }
+        else return false;
     }
 };
+
+class invalid_password{};
 
 int main(){
 
@@ -1002,85 +1084,85 @@ int main(){
 
     Resturant R;
     /// All time favourites
-    R.add_dish_ctime("All time favourites","French fries",106);
-    R.add_dish_ctime("All time favourites","Chilli cheese toast",115);
-    R.add_dish_ctime("All time favourites","Chilli cheese garlic toast",115);
-    R.add_dish_ctime("All time favourites","Garlic bread",98);
-    R.add_dish_ctime("All time favourites","Garlic bread with cheese",119);
+    R.add_dish_ctime("All_time_favourites","French_fries",106);
+    R.add_dish_ctime("All_time_favourites","Chilli_cheese_toast",115);
+    R.add_dish_ctime("All_time_favourites","Chilli_cheese_garlic_toast",115);
+    R.add_dish_ctime("All_time_favourites","Garlic_bread",98);
+    R.add_dish_ctime("All_time_favourites","Garlic_bread_with_cheese",119);
 
     /// Sandwich
-    R.add_dish_ctime("Sandwich","Plain sandwich",175);
-    R.add_dish_ctime("Sandwich","Grilled sandwich",175);
-    R.add_dish_ctime("Sandwich","Club sandwich",175);
+    R.add_dish_ctime("Sandwich","Plain_sandwich",175);
+    R.add_dish_ctime("Sandwich","Grilled_sandwich",175);
+    R.add_dish_ctime("Sandwich","Club_sandwich",175);
 
     /// South Indian
-    R.add_dish_ctime("South Indian","Rice idli",50);
-    R.add_dish_ctime("South Indian","Sambhar vada",55);
-    R.add_dish_ctime("South Indian","Dahi vada",45);
+    R.add_dish_ctime("South_Indian","Rice_idli",50);
+    R.add_dish_ctime("South_Indian","Sambhar_vada",55);
+    R.add_dish_ctime("South_Indian","Dahi_vada",45);
 
     /// Dosas
-    R.add_dish_ctime("Dosa","Plain Dosa (Butter)",125);
-    R.add_dish_ctime("Dosa","Onion dosa (Butter)",136);
-    R.add_dish_ctime("Dosa","Paper dosa",130);
-    R.add_dish_ctime("Dosa","Mysore dosa",123);
-    R.add_dish_ctime("Dosa","Rawa dosa",119);
-    R.add_dish_ctime("Dosa","Onion rawa dosa",136);
-    R.add_dish_ctime("Dosa","Masala dosa (Butter)",136);
+    R.add_dish_ctime("Dosa","Plain_dosa(Butter)",125);
+    R.add_dish_ctime("Dosa","Onion_dosa(Butter)",136);
+    R.add_dish_ctime("Dosa","Paper_dosa",130);
+    R.add_dish_ctime("Dosa","Mysore_dosa",123);
+    R.add_dish_ctime("Dosa","Rawa_dosa",119);
+    R.add_dish_ctime("Dosa","Onion_rawa_dosa",136);
+    R.add_dish_ctime("Dosa","Masala_dosa(Butter)",136);
 
     /// Pizza
-    R.add_dish_ctime("Pizza","Plain cheese pizza",190);
-    R.add_dish_ctime("Pizza","Capsicum onion pizza",210);
-    R.add_dish_ctime("Pizza","Tomato onion pizza",210);
-    R.add_dish_ctime("Pizza","Capsicum onion mushroom pizza",250);
-    R.add_dish_ctime("Pizza","Jain special pizza",250);
-    R.add_dish_ctime("Pizza","Tandoori pizza",250);
-    R.add_dish_ctime("Pizza","Super veggie pizza",265);
+    R.add_dish_ctime("Pizza","Plain_cheese_pizza",190);
+    R.add_dish_ctime("Pizza","Capsicum_onion_pizza",210);
+    R.add_dish_ctime("Pizza","Tomato_onion_pizza",210);
+    R.add_dish_ctime("Pizza","Capsicum_onion_mushroom_pizza",250);
+    R.add_dish_ctime("Pizza","Jain_special_pizza",250);
+    R.add_dish_ctime("Pizza","Tandoori_pizza",250);
+    R.add_dish_ctime("Pizza","Super_veggie_pizza",265);
 
     /// Soups
-    R.add_dish_ctime("Soup","Hot & soup",109);
-    R.add_dish_ctime("Soup","Lemon & coriander",109);
-    R.add_dish_ctime("Soup","Veg noodle soup",109);
-    R.add_dish_ctime("Soup","Sweet corn",109);
-    R.add_dish_ctime("Soup","Veg munchow",109);
-    R.add_dish_ctime("Soup","Veg clear soup",109);
+    R.add_dish_ctime("Soup","Hot_&_soup",109);
+    R.add_dish_ctime("Soup","Lemon_&_coriander",109);
+    R.add_dish_ctime("Soup","Veg_noodle_soup",109);
+    R.add_dish_ctime("Soup","Sweet_corn",109);
+    R.add_dish_ctime("Soup","Veg_munchow",109);
+    R.add_dish_ctime("Soup","Veg_clear_soup",109);
 
     /// Starters
-    R.add_dish_ctime("Starters","Spring roll",145);
-    R.add_dish_ctime("Starters","Chilly paneer dry",195);
-    R.add_dish_ctime("Starters","Veg manchurian dry",153);
-    R.add_dish_ctime("Starters","Potatoes in honey & chilly",175);
-    R.add_dish_ctime("Starters","Fired vegetables in salt & pepper",190);
-    R.add_dish_ctime("Starters","Crispy spinach & baby corn",198);
-    R.add_dish_ctime("Starters","Chilly mushroom dry",193);
+    R.add_dish_ctime("Starters","Spring_roll",145);
+    R.add_dish_ctime("Starters","Chilly_paneer_dry",195);
+    R.add_dish_ctime("Starters","Veg_manchurian_dry",153);
+    R.add_dish_ctime("Starters","Potatoes_in_honey_&_chilly",175);
+    R.add_dish_ctime("Starters","Fired_vegetables_in_salt_&_pepper",190);
+    R.add_dish_ctime("Starters","Crispy_spinach_&_baby_corn",198);
+    R.add_dish_ctime("Starters","Chilly_mushroom_dry",193);
 
     /// Main course
-    R.add_dish_ctime("Main course","Sahi paneer",210);
-    R.add_dish_ctime("Main course","Kadhai paneer",210);
-    R.add_dish_ctime("Main course","Paneer butter masala",210);
-    R.add_dish_ctime("Main course","Mushroom masala",215);
-    R.add_dish_ctime("Main course","Malai kofta",210);
-    R.add_dish_ctime("Main course","Dal makhani",192);
-    R.add_dish_ctime("Main course","Yellow dal",141);
-    R.add_dish_ctime("Main course","Rajma",141);
-    R.add_dish_ctime("Main course","Chole",141);
+    R.add_dish_ctime("Main_course","Sahi_paneer",210);
+    R.add_dish_ctime("Main_course","Kadhai_paneer",210);
+    R.add_dish_ctime("Main_course","Paneer_butter_masala",210);
+    R.add_dish_ctime("Main_course","Mushroom_masala",215);
+    R.add_dish_ctime("Main_course","Malai_kofta",210);
+    R.add_dish_ctime("Main_course","Dal_makhani",192);
+    R.add_dish_ctime("Main_course","Yellow_dal",141);
+    R.add_dish_ctime("Main_course","Rajma",141);
+    R.add_dish_ctime("Main_course","Chole",141);
 
     /// Breads
-    R.add_dish_ctime("Breads","Tandoori roti",30);
-    R.add_dish_ctime("Breads","Roomali roti",17);
-    R.add_dish_ctime("Breads","Butter roti",36);
-    R.add_dish_ctime("Breads","Plain naan",43);
-    R.add_dish_ctime("Breads","Butter naan",58);
-    R.add_dish_ctime("Breads","Garlic naan butter",60);
-    R.add_dish_ctime("Breads","Tawa parantha",53);
-    R.add_dish_ctime("Breads","Laccha parantha",53);
-    R.add_dish_ctime("Breads","Pudina parantha",53);
-    R.add_dish_ctime("Breads","Stuffed kulcha (aloo)",65);
-    R.add_dish_ctime("Breads","Stuffed kulcha (paneer)",65);
-    R.add_dish_ctime("Breads","Stuffed kulcha (onion)",65);
+    R.add_dish_ctime("Breads","Tandoori_roti",30);
+    R.add_dish_ctime("Breads","Roomali_roti",17);
+    R.add_dish_ctime("Breads","Butter_roti",36);
+    R.add_dish_ctime("Breads","Plain_naan",43);
+    R.add_dish_ctime("Breads","Butter_naan",58);
+    R.add_dish_ctime("Breads","Garlic_naan_butter",60);
+    R.add_dish_ctime("Breads","Tawa_parantha",53);
+    R.add_dish_ctime("Breads","Laccha_parantha",53);
+    R.add_dish_ctime("Breads","Pudina_parantha",53);
+    R.add_dish_ctime("Breads","Stuffed_kulcha(aloo)",65);
+    R.add_dish_ctime("Breads","Stuffed_kulcha(paneer)",65);
+    R.add_dish_ctime("Breads","Stuffed_kulcha(onion)",65);
     R.add_dish_ctime("Breads","Papad",15);
 
     /// Rice
-    R.add_dish_ctime("Rice","Steam rice",161);
+    R.add_dish_ctime("Rice","Steam_rice",161);
 
 
 
@@ -1227,5 +1309,38 @@ int main(){
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
     H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
+
+    H.set_hotel(R);
+
+    while(1){
+        int choice=0;
+        cout<<"\n-----------------------------------------------------------------\n";
+        cout<<"\n1.Owner login";
+        cout<<"\n2.Employee login";
+        cout<<"\n3.Receptionist";
+        cout<<"\nEnter your choice : ";
+        cin>>choice;
+        if(choice==1){
+            cout<<"\nEnter password : ";
+            string s;
+            cin>>s;
+            try{
+                if(s=="password"){
+                    while(H.display_owner_menu()){}
+                }
+                else throw invalid_password();
+            }
+            catch(invalid_password a){
+                cout<<"\nWorng password";
+            }
+        }
+        else if(choice==2){
+            while(H.employee_login()){}
+        }
+        else if(choice==3){
+            while(H.receptionist()){}
+        }
+        else break;
+    }
     return 0;
 }
