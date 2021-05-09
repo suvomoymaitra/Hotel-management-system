@@ -297,9 +297,8 @@ public:
         char s[200];
         cout<<"\nEnter the type of room you want : ";
         cin>>s;
-        cout<<s;
         if(vacant_room[s].size()==0){
-            cout<<"Enter valid room type";
+            cout<<"\nEnter valid room type";
             return;
         }
         int room_no = vacant_room[s][vacant_room[s].size()-1];
@@ -310,6 +309,7 @@ public:
         room.status = 1;
         room_bill=0;
         number_of_days=0;
+        cout<<"\nYour customer id is :"<<cust_id;
     }
 
     void print_person() {
@@ -380,6 +380,7 @@ public:
         vacant.pop_back();
         book_status = 1;
         dish_bill=0;
+        cout<<"\nYour customer id is :"<<cust_id;
     }
 
     void print_person() {
@@ -465,18 +466,19 @@ public:
         temp.display_menu();
         cout<<"\nEnter the names of the foods you want to order : ";
         while(s!="exit"){
-            cout<<"Enter the type : ";
+            cout<<"\nEnter the type : ";
             cin>>type;
             if(type=="exit"||type=="EXIT") return;
-            cout<<"Enter the food name : ";
+            cout<<"\nEnter the food name : ";
             cin>>s;
-            cout<<"Enter quantity : ";
+            cout<<"\nEnter quantity : ";
             cin>>qty;
             auto itr = temp.dishes[type].begin();
             for(;itr!=temp.dishes[type].end();itr++)
                 if(s==itr->get_dish_name())
                     break;
-            R.services_used.push_back(make_pair("Room service Food : "+s,qty*itr->price));
+            if(itr==temp.dishes[type].end()) cout<<"\nEnter valid data";
+            else R.services_used.push_back(make_pair("Room service Food : "+s,qty*itr->price));
 //            R.services_used.push_back(make_pair("Room service Food : "+s,qty*(find(temp.dishes[type].begin(),temp.dishes[type].end(),s)->price)));
         }
     }
@@ -511,8 +513,8 @@ public:
                 for(;itr!=temp.dishes[type].end();itr++)
                     if(s==itr->get_dish_name())
                         break;
-                R.food_ordered.push_back(make_pair(s,qty*itr->price));
-//                R.food_ordered.push_back(make_pair(s,qty*find(temp.dishes[type].begin(),temp.dishes[type].end(),s)->price));
+                if(itr==temp.dishes[type].end()) cout<<"\nEnter valid data";
+                else R.food_ordered.push_back(make_pair(s,qty*itr->price));
             }
         }
         else{
@@ -974,7 +976,12 @@ public:
                         cout<<"\nEnter valid customer number\n";
                     }
                     else{
-                        itr.perform_duty(all_room_customers[no],R);
+                        int j=0;
+                        for(auto it:all_room_customers){
+                            if(it.get_cust_id()==to_string(no)) break;
+                            j++;
+                        }
+                        itr.perform_duty(all_room_customers[j],R);
                     }
                     flag=1;
                     break;
@@ -984,8 +991,8 @@ public:
         if(!flag){
             for(auto itr:waiters){
                 if(itr.get_emp_id()==id){
+                    flag=1;
                     while(1){
-                        flag=1;
                         int no;
                         cout<<"Enter the customer number (-1 to exit): ";
                         cin>>no;
@@ -994,7 +1001,12 @@ public:
                             cout<<"Enter valid customer number";
                         }
                         else{
-                            itr.perform_duty(all_resturant_customer[no],R);
+                            int j=0;
+                            for(auto it:all_resturant_customer){
+                                if(it.get_cust_id()==to_string(no)) break;
+                                j++;
+                            }
+                            itr.perform_duty(all_resturant_customer[j],R);
                         }
                         flag=1;
                         break;
@@ -1015,7 +1027,12 @@ public:
                             cout<<"Enter valid customer number";
                         }
                         else{
-                            itr.perform_duty(all_room_customers[no]);
+                            int j=0;
+                            for(auto it:all_room_customers){
+                                if(it.get_cust_id()==to_string(no)) break;
+                                j++;
+                            }
+                            itr.perform_duty(all_room_customers[j]);
                         }
                         flag=1;
                         break;
@@ -1036,7 +1053,12 @@ public:
                             cout<<"Enter valid customer number";
                         }
                         else{
-                            itr.perform_duty(all_room_customers[no]);
+                            int j=0;
+                            for(auto it:all_room_customers){
+                                if(it.get_cust_id()==to_string(no)) break;
+                                j++;
+                            }
+                            itr.perform_duty(all_room_customers[j]);
                         }
                         flag=1;
                         break;
@@ -1210,111 +1232,112 @@ int main(){
 
     n.set_name("Vineet Bhatt");
     d.set_date(25,4,1997);
-    H.add_chef(n,"#236,Vijaynagar,Hubballi",6325669874,"vineetb17@gmail.com",y++,d,"Waiter");
+    H.add_waiter(n,"#236,Vijaynagar,Hubballi",6325669874,"vineetb17@gmail.com",y++,d,"Waiter");
 
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
-    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Waiter");
+    H.add_waiter(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Waiter");
 
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
-    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Waiter");
+    H.add_waiter(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Waiter");
 
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
-    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Waiter");
+    H.add_waiter(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Waiter");
 
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
-    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Waiter");
+    H.add_waiter(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Waiter");
 
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
-    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Waiter");
+    H.add_waiter(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Waiter");
 
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
-    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Waiter");
+    H.add_waiter(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Waiter");
 
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
-    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Waiter");
+    H.add_waiter(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Waiter");
 
 
     /// Laundry employee
 
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
-    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
+    H.add_laundry(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
 
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
-    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
+    H.add_laundry(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
 
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
-    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
+    H.add_laundry(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
 
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
-    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
+    H.add_laundry(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
 
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
-    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
+    H.add_laundry(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
 
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
-    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
+    H.add_laundry(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
 
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
-    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
+    H.add_laundry(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
 
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
-    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
+    H.add_laundry(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Laundry employee");
 
 
     /// Cleaning employee
 
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
-    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
+    H.add_room_cleaning(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
 
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
-    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
+    H.add_room_cleaning(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
 
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
-    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
+    H.add_room_cleaning(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
 
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
-    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
+    H.add_room_cleaning(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
 
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
-    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
+    H.add_room_cleaning(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
 
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
-    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
+    H.add_room_cleaning(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
 
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
-    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
+    H.add_room_cleaning(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
 
     n.set_name("Vihaan Singh");
     d.set_date(28,11,1995);
-    H.add_chef(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
+    H.add_room_cleaning(n,"#234,Vidyagiri,Hubballi",9874563214,"vihnsh26@gmail.com",y++,d,"Cleaning employee");
 
     H.set_hotel(R);
 
     while(1){
         int choice=0;
         cout<<"\n-----------------------------------------------------------------\n";
+        cout<<"\n---------------------------Main menu-----------------------------\n";
         cout<<"\n1.Owner login";
         cout<<"\n2.Employee login";
         cout<<"\n3.Receptionist";
