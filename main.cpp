@@ -310,6 +310,7 @@ public:
         occupied_rooms[s].push_back(room_no);
         room = rooms[room_no];
         room.status = 1;
+        book_status = 1;
         room_bill = 0;
         number_of_days = 0;
         cout << "\nYour customer id is :" << cust_id;
@@ -338,7 +339,7 @@ public:
     }
 
     void check_out() {
-        if (status == 0) {
+        if (book_status == 0) {
             cout << "Customer inactive";
             return;
         }
@@ -376,7 +377,6 @@ public:
     }
 
     void allocate_table(vector<int> &vacant, vector<int> &occupied) {
-        set_data();
         cout << "Your table number is : " << vacant[vacant.size() - 1];
         occupied.push_back(vacant[vacant.size() - 1]);
         table_no = occupied[occupied.size() - 1];
@@ -403,6 +403,10 @@ public:
     }
 
     void check_out() {
+        if(book_status==0){
+            cout<<"\nCustomer inactive\n";
+            return;
+        }
         view_total_bill();
         status = 0;
         book_status = 0;
@@ -496,13 +500,7 @@ class Waiter : public Employee {
 public:
     Waiter() {}
 
-    Waiter(Name name, string addr, long int ph, string mail, long long int emp_no, Date d, string role) : Employee(name,
-                                                                                                                   addr,
-                                                                                                                   ph,
-                                                                                                                   mail,
-                                                                                                                   d,
-                                                                                                                   emp_no,
-                                                                                                                   role) {}
+    Waiter(Name name, string addr, long int ph, string mail, long long int emp_no, Date d, string role) : Employee(name,addr,ph,mail,d,emp_no,role) {}
 
     void perform_duty(ResturantCustomer &R, Resturant temp) {
         cout << "\n-----------------------------------------------------------------\n";
@@ -977,12 +975,11 @@ public:
                     if (all_room_customers[no].status == 0) {
                         cout << "\nEnter valid customer number\n";
                     } else {
-                        int j = 0;
-                        for (auto it:all_room_customers) {
-                            if (it.get_cust_id() == to_string(no)) break;
-                            j++;
+                        auto it=all_room_customers.begin();
+                        for(;it!=all_room_customers.end();it++){
+                            if (it->get_cust_id() == to_string(no)) break;
                         }
-                        itr.perform_duty(all_room_customers[j], R);
+                        itr.perform_duty(*it, R);
                     }
                     flag = 1;
                     break;
@@ -1001,12 +998,12 @@ public:
                         if (all_resturant_customer[no].status == 0) {
                             cout << "Enter valid customer number";
                         } else {
-                            int j = 0;
-                            for (auto it:all_resturant_customer) {
-                                if (it.get_cust_id() == to_string(no)) break;
-                                j++;
+                            auto it=all_resturant_customer.begin();
+                            for(;it!=all_resturant_customer.end();it++){
+                                if (it->get_cust_id() == to_string(no)) break;
                             }
-                            itr.perform_duty(all_resturant_customer[j], R);
+                            it->print_person();
+                            itr.perform_duty(*it, R);
                         }
                         flag = 1;
                         break;
@@ -1026,12 +1023,11 @@ public:
                         if (all_room_customers[no].status == 0) {
                             cout << "Enter valid customer number";
                         } else {
-                            int j = 0;
-                            for (auto it:all_room_customers) {
-                                if (it.get_cust_id() == to_string(no)) break;
-                                j++;
+                            auto it=all_room_customers.begin();
+                            for(;it!=all_room_customers.end();it++){
+                                if (it->get_cust_id() == to_string(no)) break;
                             }
-                            itr.perform_duty(all_room_customers[j]);
+                            itr.perform_duty(*it);
                         }
                         flag = 1;
                         break;
@@ -1051,12 +1047,12 @@ public:
                         if (all_room_customers[no].status == 0) {
                             cout << "Enter valid customer number";
                         } else {
-                            int j = 0;
-                            for (auto it:all_room_customers) {
-                                if (it.get_cust_id() == to_string(no)) break;
-                                j++;
+                            auto it=all_room_customers.begin();
+                            for(;it!=all_room_customers.end();it++){
+                                if (it->get_cust_id() == to_string(no)) break;
                             }
-                            itr.perform_duty(all_room_customers[j]);
+                            it->print_person();
+                            itr.perform_duty(*it);
                         }
                         flag = 1;
                         break;
