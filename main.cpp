@@ -1106,6 +1106,8 @@ class invalid_password{};
 
 int main() {
 
+    Hotel H;
+
     ///--------------------------------------------Resturant------------------------------------------------------------
 
     Resturant R;
@@ -1167,6 +1169,14 @@ int main() {
     R.add_dish_ctime("Starters", "Fired_vegetables_in_salt_&_pepper", 190);
     R.add_dish_ctime("Starters", "Crispy_spinach_&_baby_corn", 198);
     R.add_dish_ctime("Starters", "Chilly_mushroom_dry", 193);
+    R.add_dish_ctime("Starters","Chicken_chilly",145);
+    R.add_dish_ctime("Starters","Chicken_65",195);
+    R.add_dish_ctime("Starters","Chicken_mnachurian",165);
+    R.add_dish_ctime("Starters","Chicken_crispy",175);
+    R.add_dish_ctime("Starters","Chicken_lollypop",195);
+    R.add_dish_ctime("Starters","Mutton_sukha",220);
+    R.add_dish_ctime("Starters","Chicken_sukha",220);
+    R.add_dish_ctime("Starters","Fish_koliwada",190);
 
     /// Main course
     R.add_dish_ctime("Main_course", "Sahi_paneer", 210);
@@ -1178,6 +1188,15 @@ int main() {
     R.add_dish_ctime("Main_course", "Yellow_dal", 141);
     R.add_dish_ctime("Main_course", "Rajma", 141);
     R.add_dish_ctime("Main_course", "Chole", 141);
+    R.add_dish_ctime("Main_course","Chicken_kadhai",190);
+    R.add_dish_ctime("Main_course","Butter_chicken",190);
+    R.add_dish_ctime("Main_course","Chicken_masala",180);
+    R.add_dish_ctime("Main_course","Chicken_dopayazi",190);
+    R.add_dish_ctime("Main_course","Chicken_maratha",190);
+    R.add_dish_ctime("Main_course","Chicken_kolhapuri",190);
+    R.add_dish_ctime("Main_course","Mutton_masala",220);
+    R.add_dish_ctime("Main_course","Mutton_kadhai",220);
+    R.add_dish_ctime("Main_course","Mutton_handi",220);
 
     /// Breads
     R.add_dish_ctime("Breads", "Tandoori_roti", 30);
@@ -1204,6 +1223,9 @@ int main() {
     R.add_dish_ctime("Rice","Hyderabadi_biriyani",220);
     R.add_dish_ctime("Rice","Curd_rice",132);
     R.add_dish_ctime("Rice","Sambhar_rice",132);
+    R.add_dish_ctime("Rice","Chicken_biriyani",190);
+    R.add_dish_ctime("Rice","Mutton_biriyani",220);
+    R.add_dish_ctime("Rice","Egg_biriyani",150);
 
     /// Noodles
     R.add_dish_ctime("Noodles","Veg_hakka_noodles",145);
@@ -1249,11 +1271,18 @@ int main() {
     R.add_dish_ctime("Coffee","Coffee_cappuccino",60);
     R.add_dish_ctime("Coffee","Cold_coffee",70);
 
+    /// Kabab
+    R.add_dish_ctime("Kabab","Chicken_tandoori",180);
+    R.add_dish_ctime("Kabab","Chicken_kali_mirchi",180);
+    R.add_dish_ctime("Kabab","Chicken_tikka",180);
+    R.add_dish_ctime("Kabab","Chicken_tangdi",180);
+    R.add_dish_ctime("Kabab","Chicken_pahadi",180);
+    R.add_dish_ctime("Kabab","Chicken_seekh",180);
 
+
+    H.set_hotel(R);
 
     ///--------------------------------------------Employee-------------------------------------------------------------
-    Hotel H;
-    H.set_hotel(R);
     Name n;
     Date d;
 
