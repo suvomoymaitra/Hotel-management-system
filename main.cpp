@@ -1265,72 +1265,72 @@ int main() {
 
     /// Laundry employee
 
-    n.set_name("Vihaan Singh");
-    d.set_date(28, 11, 1995);
-    H.add_laundry(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Laundry employee");
+    n.set_name("Nakul_Chey");
+    d.set_date(3, 12, 1996);
+    H.add_laundry(n, "#211,Vidyagiri,Hubballi", 8923100456, "nakulc70@gmail.com", y++, d, "Laundry employee");
 
-    n.set_name("Vihaan Singh");
-    d.set_date(28, 11, 1995);
-    H.add_laundry(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Laundry employee");
+    n.set_name("Omkar_Dixit");
+    d.set_date(6, 12, 1997);
+    H.add_laundry(n, "#654,Kelgeri,Dharwad", 7451126398, "omkardixit60@gmail.com", y++, d, "Laundry employee");
 
-    n.set_name("Vihaan Singh");
-    d.set_date(28, 11, 1995);
-    H.add_laundry(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Laundry employee");
+    n.set_name("Mihir_Patil");
+    d.set_date(12, 12, 1998);
+    H.add_laundry(n, "#87,UB_City,Dharwad", 8963002659, "mihirp99@gmail.com", y++, d, "Laundry employee");
 
-    n.set_name("Vihaan Singh");
-    d.set_date(28, 11, 1995);
-    H.add_laundry(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Laundry employee");
+    n.set_name("Shiva_Advani");
+    d.set_date(5, 7, 1995);
+    H.add_laundry(n, "#457,Malleshwaram,Dharwad", 7853210698, "shivaa36@gmail.com", y++, d, "Laundry employee");
 
-    n.set_name("Vihaan Singh");
-    d.set_date(28, 11, 1995);
-    H.add_laundry(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Laundry employee");
+    n.set_name("Virat_Chavan");
+    d.set_date(11, 11, 1997);
+    H.add_laundry(n, "#98,Sattur,Dharwad", 8844110033, "viratc74@gmail.com", y++, d, "Laundry employee");
 
-    n.set_name("Vihaan Singh");
-    d.set_date(28, 11, 1995);
-    H.add_laundry(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Laundry employee");
+    n.set_name("Anurag_Harsh");
+    d.set_date(21, 5, 1997);
+    H.add_laundry(n, "#323,Sharadha_Colony,Dharwad", 9003217728, "anuharsh01@gmail.com", y++, d, "Laundry employee");
 
-    n.set_name("Vihaan Singh");
-    d.set_date(28, 11, 1995);
-    H.add_laundry(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Laundry employee");
+    n.set_name("Manav_Malhar");
+    d.set_date(30, 12, 1995);
+    H.add_laundry(n, "#755,Sadhankeri,Dharwad", 7584123698, "manavmlr24@gmail.com", y++, d, "Laundry employee");
 
-    n.set_name("Vihaan Singh");
-    d.set_date(28, 11, 1995);
-    H.add_laundry(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Laundry employee");
+    n.set_name("Virat_Kamat");
+    d.set_date(23, 3, 1996);
+    H.add_laundry(n, "#228,Hosur,Hubballi", 7895463211, "viratkamat19@gmail.com", y++, d, "Laundry employee");
 
 
     /// Cleaning employee
 
-    n.set_name("Vihaan Singh");
-    d.set_date(28, 11, 1995);
-    H.add_room_cleaning(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Cleaning employee");
+    n.set_name("Dhruv_Jain");
+    d.set_date(9, 9, 1998);
+    H.add_room_cleaning(n, "#224,Vijaynagar,Hubballi", 8546971230, "dhruvj09@gmail.com", y++, d, "Cleaning employee");
 
-    n.set_name("Vihaan Singh");
-    d.set_date(28, 11, 1995);
-    H.add_room_cleaning(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Cleaning employee");
+    n.set_name("Prajwal_Mehta");
+    d.set_date(21, 5, 1997);
+    H.add_room_cleaning(n, "#454,Gandhinagar,Dharwad", 8930214793, "prajm76@gmail.com", y++, d, "Cleaning employee");
 
-    n.set_name("Vihaan Singh");
-    d.set_date(28, 11, 1995);
-    H.add_room_cleaning(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Cleaning employee");
+    n.set_name("Tanay_Naik");
+    d.set_date(2, 6, 1997);
+    H.add_room_cleaning(n, "#11,Renuka_Nagar,Hubballi", 9952036417, "tanaynaik96@gmail.com", y++, d, "Cleaning employee");
 
-    n.set_name("Vihaan Singh");
-    d.set_date(28, 11, 1995);
-    H.add_room_cleaning(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Cleaning employee");
+    n.set_name("Akhil_Jain");
+    d.set_date(23, 3, 1996);
+    H.add_room_cleaning(n, "#80,Unkal_Lake,Hubbali", 7593148062, "akhilj77@gmail.com", y++, d, "Cleaning employee");
 
-    n.set_name("Vihaan Singh");
-    d.set_date(28, 11, 1995);
-    H.add_room_cleaning(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Cleaning employee");
+    n.set_name("Piyush_K");
+    d.set_date(17, 10, 1997);
+    H.add_room_cleaning(n, "#34,NTTF,Hubballi", 8200364127, "piyushk20@gmail.com", y++, d, "Cleaning employee");
 
-    n.set_name("Vihaan Singh");
-    d.set_date(28, 11, 1995);
-    H.add_room_cleaning(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Cleaning employee");
+    n.set_name("Sanket_Shetty");
+    d.set_date(12, 12, 1995);
+    H.add_room_cleaning(n, "#631,Kelgeri,Dharwad", 9654003179, "sankets18@gmail.com", y++, d, "Cleaning employee");
 
-    n.set_name("Vihaan Singh");
-    d.set_date(28, 11, 1995);
-    H.add_room_cleaning(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Cleaning employee");
+    n.set_name("Lisha_T");
+    d.set_date(13, 9, 1995);
+    H.add_room_cleaning(n, "#53,Keshwapur,Hubballi", 6524893170, "lishat03@gmail.com", y++, d, "Cleaning employee");
 
-    n.set_name("Vihaan Singh");
-    d.set_date(28, 11, 1995);
-    H.add_room_cleaning(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Cleaning employee");
+    n.set_name("Nitish_Jain");
+    d.set_date(19, 11, 1995);
+    H.add_room_cleaning(n,"#259,Hosur,Hubballi", 8997312476, "nitishj28@gmail.com", y++, d, "Cleaning employee");
 
     H.set_hotel(R);
 
