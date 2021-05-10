@@ -692,6 +692,7 @@ public:
         cout << "\n1. Add employee";
         cout << "\n2. Remove employee";
         cout << "\n3. Get a customer data";
+        cout << "\n4. Add dish";
         cout << "\nAny other number to go out of owner menu";
         cout << "\nEnter your choice : ";
         int choice;
@@ -705,6 +706,8 @@ public:
         } else if (choice == 3) {
             get_customer_data();
             return true;
+        } else if(choice == 4){
+            add_dish();
         } else return false;
     }
 
@@ -1139,6 +1142,8 @@ int main() {
     R.add_dish_ctime("Pizza", "Jain_special_pizza", 250);
     R.add_dish_ctime("Pizza", "Tandoori_pizza", 250);
     R.add_dish_ctime("Pizza", "Super_veggie_pizza", 265);
+    R.add_dish_ctime("Pizza","Chicken_roast_pizza",210);
+    R.add_dish_ctime("Pizza","Chicken_tikka_pizza",210);
 
     /// Soups
     R.add_dish_ctime("Soup", "Hot_&_soup", 109);
@@ -1147,6 +1152,11 @@ int main() {
     R.add_dish_ctime("Soup", "Sweet_corn", 109);
     R.add_dish_ctime("Soup", "Veg_munchow", 109);
     R.add_dish_ctime("Soup", "Veg_clear_soup", 109);
+    R.add_dish_ctime("Soup","Chicken_soup",130);
+    R.add_dish_ctime("Soup","Chicken_noodle_soup",130);
+    R.add_dish_ctime("Soup","Chicken_munchow_soup",130);
+    R.add_dish_ctime("Soup","Mutton_munchow_soup",130);
+
 
     /// Starters
     R.add_dish_ctime("Starters", "Spring_roll", 145);
@@ -1185,6 +1195,58 @@ int main() {
 
     /// Rice
     R.add_dish_ctime("Rice", "Steam_rice", 161);
+    R.add_dish_ctime("Rice","Soya_dum_biriyani",220);
+    R.add_dish_ctime("Rice","Veg_pulao",161);
+    R.add_dish_ctime("Rice","Mix_veg_pulao",161);
+    R.add_dish_ctime("Rice","Jeera_pulao",161);
+    R.add_dish_ctime("Rice","Matka_biriyani",220);
+    R.add_dish_ctime("Rice","Hyderabadi_biriyani",220);
+    R.add_dish_ctime("Rice","Curd_rice",132);
+    R.add_dish_ctime("Rice","Sambhar_rice",132);
+
+    /// Noodles
+    R.add_dish_ctime("Noodles","Veg_hakka_noodles",145);
+    R.add_dish_ctime("Noodles","Chilli_garlic_noodles",145);
+    R.add_dish_ctime("Noodles","Pan_fried_noodles",225);
+    R.add_dish_ctime("Noodles","Gravy_noodles",225);
+
+    /// Chats
+    R.add_dish_ctime("Chats","Dahi_papri",90);
+    R.add_dish_ctime("Chats","Dahi_bhalla_papri",90);
+    R.add_dish_ctime("Chats","Gol_gappa",68);
+
+    /// Meals
+    R.add_dish_ctime("Meals","North_Indian_thali",280);
+    R.add_dish_ctime("Meals","South_Indian_thali",250);
+
+    /// smoothies
+    R.add_dish_ctime("Smoothies","Fruit_punch",150);
+    R.add_dish_ctime("Smoothies","Red_sea",150);
+    R.add_dish_ctime("Smoothies","Virgin_colada",150);
+    R.add_dish_ctime("Smoothies","Litchi_smoothie",150);
+
+    /// Ice cream
+    R.add_dish_ctime("Ice_cream","Vanilla",60);
+    R.add_dish_ctime("Ice_cream","Tutti_fruti",60);
+    R.add_dish_ctime("Ice_cream","Strawberry",60);
+    R.add_dish_ctime("Ice_cream","Choclate",60);
+    R.add_dish_ctime("Ice_cream","Butter_scotch",60);
+    R.add_dish_ctime("Ice_cream","Mango",60);
+    R.add_dish_ctime("Ice_cream","Kesar_pista",60);
+    R.add_dish_ctime("Ice_cream","Black_currant",60);
+
+    /// Sundae
+    R.add_dish_ctime("Sundae","Hot_chocolate_fudge",165);
+    R.add_dish_ctime("Sundae","Fruit_salad_sundae",165);
+
+    /// Tea
+    R.add_dish_ctime("Tea","Tea",40);
+    R.add_dish_ctime("Tea","Ice_tea",50);
+
+    /// Coffee
+    R.add_dish_ctime("Coffee","Coffee_mocachino",50);
+    R.add_dish_ctime("Coffee","Coffee_cappuccino",60);
+    R.add_dish_ctime("Coffee","Cold_coffee",70);
 
 
 
