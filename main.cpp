@@ -1,3 +1,13 @@
+///--------------------------------------------------------------------------------------------
+///         OOPS Final project submited by :  Team : 05  (A1 batch)
+///                Name                        Roll                       USN
+///          ----------------------------------------------------------------------------------
+///          1) Varsha Chalageri               113                    01FE19BCS033
+///          2) Nivesh Pai                     115                    01FE19BCS034
+///          3) Shakunthala Koti               134                    01FE19BCS039
+///          4) Suvomoy Maitra                 135                    01FE19BCS040
+///--------------------------------------------------------------------------------------------
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -1204,11 +1214,11 @@ int main() {
 
     n.set_name("Jay_Dixit");
     d.set_date(16, 6, 1994);
-    H.add_chef(n, "#852,Akshay Park,Hubballi", 9463092047, "jayd13@gmail.com", y++, d, "Chef");
+    H.add_chef(n, "#852,Akshay_Park,Hubballi", 9463092047, "jayd13@gmail.com", y++, d, "Chef");
 
     n.set_name("Yash_Mehta");
     d.set_date(23, 10, 1994);
-    H.add_chef(n, "#22,Renuka Nagar,Hubballi", 8889993625, "yashmehta27@gmail.com", y++, d, "Chef");
+    H.add_chef(n, "#22,Renuka_Nagar,Hubballi", 8889993625, "yashmehta27@gmail.com", y++, d, "Chef");
 
     n.set_name("Kartik_Raikar");
     d.set_date(17, 8, 1994);
@@ -1224,33 +1234,33 @@ int main() {
     d.set_date(25, 4, 1997);
     H.add_waiter(n, "#236,Vijaynagar,Hubballi", 6325669874, "vineetb17@gmail.com", y++, d, "Waiter");
 
-    n.set_name("Vihaan Singh");
-    d.set_date(28, 11, 1995);
-    H.add_waiter(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Waiter");
+    n.set_name("Abhi_Shetty");
+    d.set_date(1, 4, 1995);
+    H.add_waiter(n, "#337,Jubliee_Circle,Dharwad", 8792143664, "abhis01@gmail.com", y++, d, "Waiter");
 
-    n.set_name("Vihaan Singh");
-    d.set_date(28, 11, 1995);
-    H.add_waiter(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Waiter");
+    n.set_name("Raj_Jain");
+    d.set_date(27, 3, 1996);
+    H.add_waiter(n, "#887,Narayanpur,Dharwad", 9362100745, "rajjain69@gmail.com", y++, d, "Waiter");
 
-    n.set_name("Vihaan Singh");
-    d.set_date(28, 11, 1995);
-    H.add_waiter(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Waiter");
+    n.set_name("Vyomesh_Mane");
+    d.set_date(13, 6, 1996);
+    H.add_waiter(n, "#756,Silver Orchids,Dharwad", 9630140852, "vyomane64@gmail.com", y++, d, "Waiter");
 
-    n.set_name("Vihaan Singh");
-    d.set_date(28, 11, 1995);
-    H.add_waiter(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Waiter");
+    n.set_name("Vikram_Singh");
+    d.set_date(20, 10, 1997);
+    H.add_waiter(n, "#728,Bharatinagar,Dharwad", 8880278598, "viksingh23@gmail.com", y++, d, "Waiter");
 
-    n.set_name("Vihaan Singh");
-    d.set_date(28, 11, 1995);
-    H.add_waiter(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Waiter");
+    n.set_name("Prateek_Jadhav");
+    d.set_date(17, 1, 1997);
+    H.add_waiter(n, "#654,DC_Compound,Dharwad", 8933652104, "prateekj13@gmail.com", y++, d, "Waiter");
 
-    n.set_name("Vihaan Singh");
-    d.set_date(28, 11, 1995);
-    H.add_waiter(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Waiter");
+    n.set_name("Karan_Mehta");
+    d.set_date(14,1, 1995);
+    H.add_waiter(n, "#478,Deshpande_Nagar,Hubballi", 7544869231, "karanm25@gmail.com", y++, d, "Waiter");
 
-    n.set_name("Vihaan Singh");
-    d.set_date(28, 11, 1995);
-    H.add_waiter(n, "#234,Vidyagiri,Hubballi", 9874563214, "vihnsh26@gmail.com", y++, d, "Waiter");
+    n.set_name("Amrut_Patil");
+    d.set_date(27, 4, 1995);
+    H.add_waiter(n, "#999,KalyanNagar,Dharwad", 9863314756, "amrutp72@gmail.com", y++, d, "Waiter");
 
 
     /// Laundry employee
