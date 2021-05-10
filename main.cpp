@@ -708,6 +708,7 @@ public:
             return true;
         } else if(choice == 4){
             add_dish();
+            return true;
         } else return false;
     }
 
