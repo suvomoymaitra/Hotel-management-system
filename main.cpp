@@ -300,8 +300,7 @@ public:
         cout << "Please visit again!!!!\n";
     }
 
-    void
-    allocate_room(map<string, vector<int>> &vacant_room, map<string, vector<int>> &occupied_rooms, vector<Room> rooms) {
+    void allocate_room(map<string, vector<int>> &vacant_room, map<string, vector<int>> &occupied_rooms, vector<Room> rooms) {
         for (auto itr:vacant_room) {
             cout << itr.first << " " << itr.second.size() << "\n";
         }
@@ -905,8 +904,7 @@ public:
         cleaning_employees.push_back(c);
     }
 
-    void
-    add_laundry(Name name, string addr, long long int ph, string mail, long long int emp_no, Date dob, string role) {
+    void add_laundry(Name name, string addr, long long int ph, string mail, long long int emp_no, Date dob, string role) {
         LaundryEmployee l(name, addr, ph, mail, emp_no, dob, role);
         laundry_employees.push_back(l);
     }
