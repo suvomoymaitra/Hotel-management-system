@@ -27,7 +27,7 @@ public:
     }
 
     void put_name() {
-        getline(cin,name);
+        cin>>name;
     }
 
     void set_name(string s) {
@@ -174,11 +174,11 @@ public:
     void add_dish() {
         string s;
         cout << "\nEnter the dish type : ";
-        getline(cin,s);
+        cin>>s;
         string name;
         float price;
         cout << "Enter the dish name : ";
-        getline(cin,name);
+        cin>>name;
         cout << "Enter the price of the dish : ";
         cin >> price;
         Dish temp(name, price, s);
@@ -306,7 +306,7 @@ public:
         }
         string s;
         cout << "\nEnter the type of room you want : ";
-        getline(cin,s);
+        cin>>s;
         if (vacant_room[s].size() == 0) {
             cout << "\nEnter valid room type";
             return;
@@ -486,10 +486,10 @@ public:
         cout << "\nEnter the names of the foods you want to order : ";
         while (s != "exit") {
             cout << "\nEnter the type : ";
-            getline(cin,type);
+            cin>>type;
             if (type == "exit" || type == "EXIT") return;
             cout << "\nEnter the food name : ";
-            getline(cin,s);
+            cin>>s;
             cout << "\nEnter quantity : ";
             cin >> qty;
             auto itr = temp.dishes[type].begin();
@@ -522,10 +522,10 @@ public:
             cout << "\nEnter the names of the foods you want to order : ";
             while (s != "exit") {
                 cout << "Enter the type : ";
-                getline(cin,type);
+                cin>>type;
                 if (type == "exit" || type == "EXIT") return;
                 cout << "Enter the food name : ";
-                getline(cin,s);
+                cin>>s;
                 cout << "Enter quantity : ";
                 cin >> qty;
                 auto itr = temp.dishes[type].begin();
@@ -854,11 +854,11 @@ public:
         cout << "\nName : ";
         name.put_name();
         cout << "Address : ";
-        getline(cin,addr);
+        cin>>addr;
         cout << "phone number : ";
         cin >> ph;
         cout << "Email id : ";
-        getline(cin,mail);
+        cin>>mail;
         emp_no = y++;
         cout << "DOB : ";
         dob.put_date();
